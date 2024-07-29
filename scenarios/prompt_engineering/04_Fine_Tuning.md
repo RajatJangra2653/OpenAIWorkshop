@@ -1,27 +1,27 @@
-# Exercise 4C: Fine Tuning (Read-Only)
+# Exercício 4C: Fine Tuning (Apenas leitura)
 
-## Topics
+## Tópicos
 
-  - [What is Fine Tuning?](#what-is-fine-tuning)
-  - [When would you consider Fine Tuning vs Prompt Engineering?](#when-would-you-consider-fine-tuning-vs-prompt-engineering)
-  - [Operation Cost Considerations](#operation-cost-considerations)
+  - [O que é Fine Tuning?](#what-is-fine-tuning)
+  - [Quando você consideraria Fine Tuning vs Prompt Engineering?](#when-would-you-consider-fine-tuning-vs-prompt-engineering)
+  - [Considerações sobre o custo da operação](#operation-cost-considerations)
 
-
----
-## What is Fine Tuning?
-
-Fine-tuning is the process of customizing an existing AI model for a specific task or domain by using additional data. OpenAI offers fine-tuning for its language models, such as GPT-3, which can generate natural language texts for various purposes.
-
-Fine-tuning allows users to create customized models that can produce more accurate and relevant outputs than general models.
-
-To fine-tune an OpenAI model, users need to prepare their own training and validation data, select a base model, and use the OpenAI CLI or Studio to start the fine-tuning job.
-
-Fine-tuning can improve the performance and reduce the error rates of OpenAI models significantly.
 
 ---
-## Fine Tuning Training Data
+## O que é Fine Tuning?
 
-Training data for fine-tuning OpenAI models are pairs of input prompts and desired outputs that reflect the specific task or domain you want to customize the model for. For example, if you want to fine-tune a model for generating product reviews, your training data could look like this:
+O Fine-tuning é o processo de personalizar um modelo de IA existente para uma tarefa ou domínio específico usando dados adicionais. A OpenAI oferece fine-tuning para seus modelos de linguagem, como o GPT-3, que pode gerar textos em linguagem natural para vários fins.
+
+Fine-tuning permite que os usuários criem modelos personalizados que podem produzir resultados mais precisos e relevantes do que os modelos gerais.~
+
+Para ajustar um modelo OpenAI, os usuários precisam preparar seus próprios dados de treinamento e validação, selecionar um modelo base e usar a CLI ou o Studio do OpenAI para iniciar o trabalho de fine-tuning.
+
+O fine-tuning pode melhorar o desempenho e reduzir significativamente as taxas de erro dos modelos OpenAI.
+
+---
+## Fine Tuning Dados de treinamento
+
+Os dados de treinamento para ajustar modelos de OpenAI são pares de prompts de entrada e saídas desejadas que refletem a tarefa ou o domínio específico para o qual você deseja personalizar o modelo. Por exemplo, se você quiser ajustar um modelo para gerar avaliações de produtos, seus dados de treinamento poderão ter esta aparência:
 
 ```
 {"prompt": "Review: I bought this laptop for my online classes and it works great.", "completion": "Rating: 5 stars"}
@@ -29,46 +29,47 @@ Training data for fine-tuning OpenAI models are pairs of input prompts and desir
 {"prompt": "Review: This is a scam. The product never arrived and the seller did not respond.", "completion": "Rating: 1 star"}
 ```
 
-You can use the OpenAI CLI or Studio to prepare, validate, and format your training data into a JSON file that can be used for fine-tuning.
+Você pode usar o OpenAI CLI ou Studio para preparar, validar e formatar os seus dados de treinamento em um arquivo JSON que pode ser usado para fine-tuning.
+
 
 **IMPORTANT NOTE**:
-It is important to note that to expect better results than using prompt engineering, you will need to have a large and high-quality dataset that is relevant to your task or domain, usually a few hundred high-quality examples.
+É importante notar que, para esperar melhores resultados do que usar Prompt Engineering, você precisará ter um conjunto de dados grande e de alta qualidade que seja relevante para a sua tarefa ou domínio, geralmente algumas centenas de exemplos de alta qualidade.
 
 ---
-## When would you consider Fine Tuning vs Prompt Engineering?
+## Quando você consideraria Fine Tuning vs Prompt Engineering?
 
-Fine-tuning is a powerful tool that can be used to customize OpenAI models for specific tasks or domains. However, it is not always necessary to fine-tune a model to get the desired results.
+O Fine-tuning é uma ferramenta poderosa que pode ser usada para personalizar modelos de OpenAI para tarefas ou domínios específicos. No entanto, nem sempre é necessário ajustar um modelo para obter os resultados desejados.
 
-Fine-tuning and prompt engineering are two methods of conditioning language models to perform specific tasks or domains.
+O Fine-tuning e a Prompt Engineering são dois métodos de condicionamento de modelos de linguagem para executar tarefas ou domínios específicos
 
-Fine-tuning involves retraining an existing model on new data, while prompt engineering involves designing and testing input instructions that elicit the desired output from a model.
+O Fine-tuning envolve o retreinamento de um modelo existente com novos dados, enquanto a Prompt Engineering envolve projetar e testar instruções de entrada que obtêm o output desejado de um modelo.
 
 ### Fine Tuning
 
-You might consider fine-tuning when you have a large and high-quality dataset that is relevant to your task or domain and you want to create a customized model that can produce more accurate and consistent outputs than the general model.
+Você pode considerar o fine-tuning quando tiver um conjunto de dados grande e de alta qualidade que seja relevante para sua tarefa ou domínio e quiser criar um modelo personalizado que possa produzir ouputs mais precisos e consistentes do que o modelo geral.
 
 ### Prompt Engineering
 
-You might consider prompt engineering when you have a limited or no dataset and you want to leverage the existing knowledge and capabilities of a general model by asking the right questions or providing the right context.
+Você pode considerar Prompt Engineering quando tiver um conjunto de dados limitado ou inexistente e quiser aproveitar o conhecimento e os recursos existentes de um modelo geral fazendo as perguntas certas ou fornecendo o contexto certo. 
 
-**IMPORTANT NOTE**: Both methods require some trial and error, but fine-tuning usually takes more time and resources than prompt engineering, and it is not always necessary to fine-tune a model to get the desired results. It is therefore preferable to start with prompt engineering and only consider fine-tuning if you are unable to get the desired results.
-
----
-
-## Operation Cost Considerations
-
-Prompt engineering could be less cost-effective if you need to provide a large number of instructions to accomplish something similar to what you would get with a Fine Tuned model as you'd consume tokens with every request sent.
-
-Hosting a Fine Tune model also has its cost, but on medium to high volumes, that cost would be mostly irrelevant, so operational cost efficiency could be a driver for Fine Tuning.
+**NOTA IMPORTANTE**: Ambos os métodos exigem alguma tentativa e erro, mas o fine-tuning geralmente leva mais tempo e recursos do que a Prompt Engineering, e nem sempre é necessário ajustar um modelo para obter os resultados desejados. Portanto, é preferível começar com Prompt Engineering e só considerar o fine-tuning se você não conseguir obter os resultados desejados.
 
 ---
-## References
+
+## Considerações sobre o custo da operação
+
+Prompt engineering pode ser menos econômica se você precisar fornecer um grande número de instruções para realizar algo semelhante ao que você obteria com um modelo Fine Tuned, pois consumiria tokens a cada solicitação enviada.
+
+Hospedar um modelo Fine Tune também tem seu custo, mas em volumes médios a altos, esse custo seria praticamente irrelevante, então a eficiência de custos operacionais poderia ser um impulsionador do Fine Tuning.
+
+---
+## Referências
 
 [OpenAI Fine Tuning](https://platform.openai.com/docs/guides/fine-tuning)
 
-[Fine Tuning in the Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/fine-tuning?pivots=programming-language-studio)
+[Fine Tuning no serviço Azure OpenAI](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/how-to/fine-tuning?pivots=programming-language-studio)
 
 
 ---
 
-[Previous Section (Advanced Concepts)](./03_Advanced_Concepts.md)
+[Secção Anterior (Conceitos Avançados)](./03_Advanced_Concepts.md)

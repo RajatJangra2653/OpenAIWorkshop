@@ -1,10 +1,10 @@
 ## PYTHON SDK
 
-### Step 1. Install required python packages
+### Passo 1. Instalar pacotes python necessários
 
-- In your command line run "pip install -r requirements.txt" to install openai python package 
+- Na sua linha de comando, execute "pip install -r requirements.txt" para instalar o pacote de python de openai 
 
 
-### Step 2. Open openaipython.py file
+### Passo 2. Abrir o arquivo openaipython.py
 
-- Put your own OpenAI API key and OpenAI endpoint in this file
+- Coloque a sua própria chave de API OpenAI e endpoint neste arquivo

@@ -1,21 +1,21 @@
-# Exercise 4B: Advanced Concepts (Read-Only)
+# Exercício 4B: Conceitos Avançados (Apenas leitura)
 
-## Topics
+## Tópicos
 
-  - [Introduction](#introduction)
+  - [Introdução](#introduction)
   - [Zero-Shot Prompts](#zero-shot-prompts)
   - [One-Shot Prompts](#one-shot-prompts)
   - [Few-Shot Prompts](#few-shot-prompts)
 
 ---
 
-## Introduction
+## Introdução
 
-At this point, you have experienced the power and flexibility of prompts. Tuning prompts to get the desired results is the idea behind prompt engineering.
+Até este ponto, você experimentou o poder e a flexibilidade dos prompts. Ajustar prompts para obter os resultados desejados é a ideia por trás da Prompt Engineering.
 
-We will now cover some more advanced topics to tune our outputs without introducing the fine-tuning of our GPT models.
+Vamos agora abordar alguns tópicos mais avançados para ajustar os nossos outputs sem introduzir o fine-tuning dos nossos modelos GPT.
 
-Let's take a simple classification example:
+Vamos dar um exemplo simples de classificação:
 
 *Prompt:*
 ```
@@ -29,15 +29,15 @@ Text: I think this movie was terrible. What a waste of time.
 Negative
 ```
 
-The output seems to be correct, but we could improve it by providing more information to the model if we wanted a more granular classification. Let's do this via a Zero-Shot prompt.
+O resultado parece estar correto, mas poderíamos melhorá-lo fornecendo mais informações ao modelo se quiséssemos uma classificação mais granular. Vamos fazer isso por meio de um prompt Zero-Shot.
 
 ---
 
 ## Zero-Shot Prompts
 
-The GPT LLMs are trained on such large amounts of data that they are capable of understanding complex instructions to lead to the desired output in most cases. This is called 'Zero-Shot' prompt.
+Os LLMs GPT são treinados em quantidades tão grandes de dados que são capazes de compreender instruções complexas para levar ao output desejado na maioria dos casos. Isso é chamado de prompt 'Zero-Shot'.
 
-We could refine the example below by being more descriptive about our instructions.
+Poderíamos refinar o exemplo abaixo sendo mais descritivos sobre nossas instruções.
 
 *Prompt:*
 ```
@@ -51,15 +51,15 @@ Text: I think this movie was terrible. What a waste of time.
 Very Negative
 ```
 
-This is called Zero-Shot. A precise instruction leads to the desired output without any examples.
+Isso é chamado de Zero-Shot. Uma instrução precisa leva ao output desejado sem quaisquer exemplos.
 
 ---
 
 ## One-Shot Prompts
 
-Sometimes it may be easier to provide an example of the model to learn from. This is called 'One-Shot' prompt.
+Por vezes, pode ser mais fácil fornecer um exemplo do modelo para aprender. Isso é chamado de prompt 'One-Shot'.
 
-First, let's do a Zero Shot prompt.
+Primeiro, vamos fazer um prompt Zero Shot.
 
 *Prompt:*
 ```
@@ -73,9 +73,9 @@ University: UCLA
 City: Los Angeles, California
 ```
 
-Let's say you wanted to have a specific output for this prompt. You could provide an example of the model to learn from.
+Digamos que você queria ter um output específico para esse prompt. Você pode fornecer um exemplo para o modelo aprender.
 
-Here's a One-Shot Prompt that leads to the same output.
+Aqui está um prompt One-Shot que leva ao mesmo output.
 
 *Prompt:*
 ```
@@ -92,9 +92,9 @@ University: MIT
 City: Cambridge, MA, USA
 ```
 
-Note that you could have used the Zero-Shot prompt for this example as well. But One-Shot prompts are more flexible and can be used to fine-tune the model to your needs.
+Observe que você também poderia ter usado o prompt Zero-Shot para este exemplo. Mas os prompts One-Shot são mais flexíveis e podem ser usados para ajustar o modelo às suas necessidades.
 
-Here's a Zero-Shot Prompt equivalent.
+Aqui está um equivalente de prompt Zero-Shot.
 
 *Prompt:*
 ```
@@ -112,11 +112,11 @@ City: Los Angeles, CA, USA
 
 ## Few-Shot Prompts
 
-Few-Shot prompts enable you to provide multiple examples of the model to learn from. This is useful when you want to fine-tune the output for more complex scenarios where the output may vary based on the input. It may also be a simpler way to define a task than providing detailed, natural language instructions of what you expect.
+Os prompts Few-Shot permitem que você forneça vários exemplos ao modelo para aprender. Isso é útil quando você deseja ajustar o output saída para cenários mais complexos, onde o output pode variar com base na entrada. Também pode ser uma maneira mais simples de definir uma tarefa do que fornecer instruções detalhadas em linguagem natural do que você espera.
 
-Here's an example of entity extraction that is well-suited to few-shot prompts.
+Aqui está um exemplo de extração de entidade que é adequado para prompts few-shot.
 
-Let's try it first with a Zero-Shot prompt.
+Vamos tentar primeiro com um prompt Zero-Shot.
 
 *Prompt:*
 ```
@@ -134,9 +134,9 @@ Text: Fred is a serial entrepreneur. Co-founder and CEO of Platform.sh, he previ
 }
 ```
 
-Not exactly what we expect (only 'Platform.sh' should come back in 'Company'), and it may be difficult to express that in a Zero-Shot prompt. 
+Não é exatamente o que esperamos (apenas 'Platform.sh' deve estar no campo 'Company'), e pode ser difícil expressar isso em um prompt Zero-Shot. 
 
-Let's try a Few-Shot prompt. Note that we're going to drop the instructions and just provide the desired output.
+Vamos tentar um prompt Few-Shot. Note que vamos deixar cair as instruções e apenas fornecer a saída desejada.
 
 *Prompt:*
 ```
@@ -165,9 +165,9 @@ JSON:
 }
 ```
 
-Note that the output is not what we want here, but there haven't been enough examples to understand if the goal is to extract key entities or certain entities only.
+Observe que o output não é o que queremos aqui, mas não houve exemplos suficientes para entender se o objetivo é extrair entidades-chave ou apenas determinadas entidades.
 
-A few shots prompt will clarify this.
+Usando few-shots esclarecerão isso.
 
 *Prompt:*
 ```
@@ -202,10 +202,10 @@ JSON:
   "Company": "Danone"
 }
 ```
-Now we can see that the model clearly understands that we want to only extract three entities from the text and nothing else.
+Agora podemos ver que o modelo entende claramente que queremos extrair apenas três entidades do texto e nada mais.
 
 ---
 
-[Previous Section (Sample Scenarios)](./02_Sample_Scenarios/01_Text_Summarization.md)
+[Secção Anterior (Cenários de exemplo)](./02_Sample_Scenarios/01_Text_Summarization.md)
 
-[Next Section (Fine Tuning)](./04_Fine_Tuning.md)
+[Próxima Secção (Fine Tuning)](./04_Fine_Tuning.md)

@@ -4,66 +4,66 @@ In this exercise, you'll explore the concept of prompt engineering, learning how
 
 ## Topics
 
-- [What is a prompt?](#what-is-a-prompt)
-- [What is prompt engineering?](#what-is-prompt-engineering)
-- [Trying out Prompt Engineering with Azure OpenAI Playground](#Trying-out-Prompt-Engineering-with-Azure-OpenAI-Playground)
-- [Basic Prompt Examples](#basic-prompt-examples)
-- [Elements of a Prompt](#elements-of-a-prompt)
-- [Chat playground parameters](#Chat-playground-parameters)
-- [General Tips for Designing Prompts](#general-tips-for-designing-prompts)
+- [O que é um prompt?](#what-is-a-prompt)
+- [O que é prompt engineering?](#what-is-prompt-engineering)
+- [Experimentando o Prompt Engineering com o Azure OpenAI Playground](#Trying-out-Prompt-Engineering-with-Azure-OpenAI-Playground)
+- [Exemplos de prompt básicos](#basic-prompt-examples)
+- [Elementos de um prompt](#elements-of-a-prompt)
+- [Parâmetros do Chat playground](#Chat-playground-parameters)
+- [Dicas gerais para criar prompts](#general-tips-for-designing-prompts)
 
 
-## What is a prompt?
+## O que é um prompt?
 ![image](https://www.closerscopy.com/img/blinking-cursor-v2.gif)
 
-We've all seen the blinking cursor. Waiting expectantly for us to act, denoting our chance to provide input...
+Todos nós vimos o cursor piscando. Esperando ansiosamente por nós para agir, denotando a nossa chance de fornecer informações ...
 
-One way to think of a prompt is as a piece of text that is used to initiate or provide context for the generation of output, primarily natural language in our use cases, by the language model. This could be an input sentence, question, or topic to generate a response from the language model.
+Uma forma de pensar em um prompt é como um pedaço de texto que é usado para iniciar ou fornecer contexto para a geração de output, principalmente linguagem natural em nossos casos de uso, pelo modelo de linguagem. Isto pode ser uma frase de entrada, pergunta ou tópico para gerar uma resposta do modelo de linguagem.
 
-## What is prompt engineering?
-Prompt engineering is a relatively [new discipline](https://www.businessinsider.com/prompt-engineering-ai-chatgpt-jobs-explained-2023-3) for developing and optimizing prompts to efficiently use language models (LMs) across a wide variety of business applications. Prompt engineering skills help to better understand the capabilities and limitations of large language models (LLMs) and refine the completions (outputs) of LLMs. Prompt engineering is used to improve the capacity of LLMs on a wide range of common and complex tasks, such as question answering and arithmetic reasoning. Developers use prompt engineering to design robust and effective prompting techniques that interface with LLMs and other tools.
+## O que é prompt engineering?
+Prompt engineering é uma [disciplina](https://www.businessinsider.com/prompt-engineering-ai-chatgpt-jobs-explained-2023-3) relativamente nova para desenvolver e otimizar prompts para usar eficientemente modelos de linguagem (LMs) em uma ampla variedade de aplicativos de negócios. Habilidades de prompt engineering ajudam a entender melhor as capacidades e limitações dos grandes modelos de linguagem (LLMs) e refinar as conclusões (outputs) de LLMs. Prompt engineering é usada para melhorar a capacidade dos LLMs em uma ampla gama de tarefas comuns e complexas, como resposta a perguntas e raciocínio aritmético. Os desenvolvedores usam prompt engineering para projetar técnicas de prompting robustas e eficazes que fazem interface com LLMs e outras ferramentas.
 
-This guide covers the basics of standard prompts to provide a rough idea of how to interact with and instruct the LLMs found on [Azure OpenAI Studio's Playground](https://oai.azure.com/portal/playground). 
+Este guia aborda os conceitos básicos de prompts padrão para fornecer uma ideia aproximada de como interagir e instruir os LLMs encontrados no [Playground do Azure OpenAI Studio](https://oai.azure.com/portal/playground).
 
-###  Trying out Prompt Engineering with Azure OpenAI Playground
-Azure OpenAI Studio provides access to model management, deployment, experimentation, customization, and learning resources. The Chat playground within Azure OpenAI Studio is based on a conversation-in, message-out interface. You can initialize the session with a system message to set up the chat context.
+###  Experimentando o Prompt Engineering com o Azure OpenAI Playground
+O Azure OpenAI Studio fornece acesso a recursos de gerenciamento, implantação, experimentação, personalização e aprendizagem de modelos. O Chat Playground no Azure OpenAI Studio é baseado em uma interface de entrada e saída de mensagens. Você pode inicializar a sessão com uma mensagem do sistema para configurar o contexto do chat.
 
-In the Chat playground, you're able to add few-shot examples. The term few-shot refers to providing a few of examples to help the model learn what it needs to do. You can think of it in contrast to zero-shot, which refers to providing no examples.
+No Chat playground, você pode adicionar exemplos de few-shot. O termo few-shot refere-se a fornecer alguns exemplos para ajudar o modelo a aprender o que precisa fazer. Você pode pensar nisso em contraste com zero-shot, que se refere a não fornecer exemplos.
 
-In the Assistant setup, you can provide few-shot examples of what the user input may be, and what the assistant response should be. The assistant tries to mimic the responses you include here in tone, rules, and format you've defined in your system message.
-Let's go ahead and launch the Azure OpenAI playground to learn about prompt engineering. 
+Na configuração do Assistente, você pode fornecer alguns exemplos do que pode ser a entrada do usuário e qual deve ser a resposta do assistente. O assistente tenta imitar as respostas que você inclui aqui no tom, nas regras e no formato que você definiu na mensagem do sistema.
+Vamos agora iniciar o playground do Azure OpenAI para aprender mais sobre Prompt Engineering.
 
-1. In the **Azure portal**, search for **OpenAI** and select **Azure OpenAI**.
+1. No **Portal de Azure**, pesquise por **OpenAI** e selecione **Azure OpenAI**.
 
    ![](../natural_language_query/images/openai8.png)
 
-1. On **Azure AI services | Azure OpenAI** blade, select **openai-<inject key="DeploymentID" enableCopy="false"/>**
+1. Na janela **Azure AI services | Azure OpenAI**, selecione **openai-<inject key="DeploymentID" enableCopy="false"/>**
 
-1. In the Azure OpenAI resource pane, click on **Go to Azure OpenAI Studio** it will navigate to **Azure AI Studio**.
+1. No painel de recursos do Azure OpenAI, clique em **Go to Azure OpenAI Studio** ele navegará até **Azure AI Studio**.
 
    ![](../natural_language_query/images/openai11-1.png)
 
-1. In the **Azure AI Stuido**, click on **Chat** under play **Playground** from the left menu.
+1. No **Azure AI Studio**, clique em **Chat** sobre **Playground** no menu à esquerda..
 
     ![](../powerapp_and_python/images/chat-demo1.png)
 
-1. In the **Chat** section, choose **default** **(1)** under the use a system message template. Then, give any query from the **Chat session** **(2)** to get the response from the openai. 
+1. Na seção **Chat**, escolha **default** **(1)** em use a system message template. Em seguida, faça qualquer consulta da **Chat session** **(2)** para obter a resposta do openai.
 
-   >**Note**: Click on **Continue** on **Update system message?** when prompted.
+   >**Nota**: Clique em **Continue** no **Update system message?** quando solicitado.
    ![](/scenarios/media/E2S5.png)
    
-   > **Note**: Chat may not respond with the exact output as shown in the screenshots. Following are the examples of what you'll most likely see in this exercise, but the response may vary.
+   > **Nota**: O Chat pode não responder com um output exato, conforme mostrado nas capturas de tela. A seguir estão os exemplos do que você provavelmente verá neste exercício, mas a resposta pode variar.
  
     ![](../powerapp_and_python/images/prompt.png)
 
 ---
-## Basic Prompt Examples
+## Exemplos de prompt básicos
 
-> **Note:** Please feel free to enter anything listed in the `Prompt:` box into a `text-davinci-003` model in the [Azure OpenAI Studio's Playground](https://oai.azure.com/portal/playground) to follow along with these prompt examples. Be aware that you may receive different outputs than what is listed in the `Output:` box, given the nature of generative models
+> **Nota:** Sinta-se à vontade para inserir qualquer coisa listada na caixa `Prompt:` em um modelo `text-davinci-003` no [Azure OpenAI Studio's Playground](https://oai.azure.com/portal/playground) para acompanhar esses exemplos de prompt. Esteja ciente de que você pode receber outputs diferentes das listadas na caixa `Output:`, dada a natureza dos modelos generativos. 
 
-You can achieve a lot with prompts, but the quality of results depends on how much information you provide in the prompt without being overly descriptive. A prompt can contain information like instructions or questions. As we will learn later with more advanced prompts, we can also supply examples of required outputs as well as context for our instructions.
+Você pode conseguir muito com prompts, mas a qualidade dos resultados depende de quantas informações você fornece no prompt sem ser excessivamente descritivo. Um prompt pode conter informações como instruções ou perguntas. Como aprenderemos mais tarde com prompts mais avançados, também podemos fornecer exemplos de output, bem como contexto para nossas instruções.
 
-Here is a basic example of a simple prompt:
+Aqui está um exemplo básico de um prompt simples:
 
 *Prompt:*
 ```
@@ -75,11 +75,11 @@ GPT-3 is
  It is a large-scale language model that uses deep learning techniques to generate human-like text. GPT-3 uses a
  transformer-based architecture to generate text with context
 ```
-> **Note:**  The `Output` in our example ends abruptly because our **Max length (tokens)** variable is set to `=60`. **Max Length (tokens)** sets a limit on the number of tokens to generate in a response. The `text_davinci-003` model supports a maximum of 2048 tokens shared between a given prompt and response completion. (One token is roughly 4 characters for typical English text.)
+> **Nota:**  O `Output` em nosso exemplo termina abruptamente porque nossa variável **Max length (tokens)** está definida como `=60`. **Max Length (tokens)** define um limite para o número de tokens a serem gerados em uma resposta. O modelo `text_davinci-003` suporta um máximo de 2048 tokens compartilhados entre um determinado prompt e a conclusão da resposta. (Um token tem aproximadamente 4 caracteres para o texto típico em inglês.)
 
-The `Output:` is a series of strings that make sense given the context provided by our prompt of `"GPT3-3 is"`. However, the output may be unwanted or unexpected based on our use-case. How can we refine, or engineer, our prompt in order to achieve our desired output?
+O `Output:` é uma série de strings que fazem sentido dado o contexto fornecido pelo nosso prompt de `"GPT3-3 is"`. No entanto, o output pode ser indesejada ou inesperada com base no nosso caso de uso. Como podemos refinar, ou projetar, nosso prompt para alcançar o resultado desejado?
 
-The first thing we can do is provide explicit instructions as to what we want the model to do with our previous prompt. This is what is meant by _prompt engineering_: refining the input so as to produce the best output from the LLM.
+A primeira coisa que podemos fazer é fornecer instruções explícitas sobre o que queremos que o modelo faça com nosso prompt anterior. É o que se entende por _prompt engineering_: refinar o input de modo a produzir o melhor output do LLM.
 
 *Prompt:*
 ```
@@ -91,24 +91,25 @@ Tell me a joke that begins with: GPT-3 is
 GPT-3 is so intelligent that it can tell a joke without a punchline.
 ```
 
-Did our instructions improve our output? Admittedly, this is not the funniest joke ever told. And unlike supervised learning problems, there is no easy error or loss metric to compare between the two outputs. Let's look at exactly what we asked the model to generate and what we received:
-| Requirement | Output Meets Requirement? | 
+As nossas instruções melhoraram os nossos resultados? É certo que esta não é a piada mais engraçada alguma vez contada. E, ao contrário dos problemas de aprendizagem supervisionada, não há erro fácil ou métrica de perda para comparar entre os dois resultados. Vejamos exatamente o que pedimos ao modelo para gerar e o que recebemos:
+
+| Requisito | Output atende aos requisitos? | 
 |-------------|--------|
-| Begin with the words, "GPT-3 is" | Yes, the `Output:` began with the words "GPT-3 is" |
-| The output be in the form of a joke | An attempt was made |
+| Comece com as palavras, "GPT-3 é" | Sim, o `Output:` começou com as palavras "GPT-3 é" |
+| O output pode ser na forma de uma piada | Foi feita uma tentativa |
 
 ---
-## Standard Prompts
+## Prompts padrão
 
-We looked at two very basic prompts above as well as the output they generated. Now that we are familiar with the basic concepts of prompt engineering, let's look at some common formats for prompts. 
+Analisamos dois prompts muito básicos acima, bem como a saída que eles geraram. Agora que estamos familiarizados com os conceitos básicos de prompt engineering, vamos ver alguns formatos comuns para prompts. 
 
-### Question Format
+### Formato da pergunta
 
 ```
 <Question>?
 ```
-### Question-Answer (QA) Format 
-This can be formatted into a QA format, which is standard in a lot of QA datasets, as follows:
+### Formato Pergunta-Resposta (QA)
+Isso pode ser formatado em um formato de QA, que é padrão em muitos conjuntos de dados de QA, da seguinte forma:
 
 ```
 Q: <Question>?
@@ -119,8 +120,8 @@ Another way to think about this, using other common terms, would be:
 Prompt: <Question>?
 Completion: <Answer>
 ```
-### Few-shot Format
-Given the standard format above, one popular and effective technique to prompting is referred to as few-shot prompting where we provide multiple examples. Few-shot prompts can be formatted as follows:
+### Formato Few-shot
+Dado o formato padrão acima, uma técnica popular e eficaz para prompting é referida como few-shot prompting, onde fornecemos vários exemplos. Os few-shot prompts podem ser formatados da seguinte forma:
 
 ```
 <Question>?
@@ -136,8 +137,8 @@ Given the standard format above, one popular and effective technique to promptin
 
 ```
 
-### Few-shot Question-Answer (QA) Format
-And you can already guess that its QA format version would look like this:
+### Few-shot Formato Pergunta-Resposta (QA)
+E você já pode adivinhar que sua versão de formato QA ficaria assim:
 
 ```
 Q: <Question>?
@@ -153,7 +154,7 @@ Q: <Question>?
 A:
 ```
 
-Keep in mind that it's not required to use the QA format. The format depends on the task at hand. For instance, you can perform a simple classification task and give examples that demonstrate the task as follows:
+Tenha em mente que não é necessário usar o formato de QA. O formato depende da tarefa em questão. Por exemplo, você pode executar uma tarefa de classificação simples e dar exemplos que demonstrem a tarefa da seguinte forma:
 
 *Prompt:*
 ```
@@ -183,71 +184,71 @@ FedEx:
 ```
 Logistics, Delivery, and Shipping
 ```
-Few-shot prompts enable in-context learning, which is the ability of language models to learn tasks given only a few examples. We will see more of this in action in the upcoming advanced prompt engineering sections.
+Few-shot Prompts permitem a aprendizagem em contexto, que é a capacidade dos modelos linguísticos de aprender tarefas dadas apenas com alguns exemplos. Veremos mais disso em ação nas próximas seções avançadas de prompt engineering.
 
 ---
 
 
-## Elements of a Prompt
+## Elementos de um prompt
 
-As we cover more and more examples and applications that are possible with prompt engineering, you will notice that there are certain elements that make up a prompt. 
+À medida que abordamos mais e mais exemplos e aplicações que são possíveis com prompt engineering, você notará que há certos elementos que compõem um prompt. 
 
-A prompt can contain any of the following components:
+Um prompt pode conter qualquer um dos seguintes componentes:
 
-- **Instruction** - a specific task or instruction you want the model to perform
+- **Instruction** - uma tarefa ou instrução específica que você deseja que o modelo execute
 
-- **Context** - can involve external information or additional context that can steer the model to better responses
+- **Context** - pode envolver informações externas ou contexto adicional que pode orientar o modelo para melhores respostas
 
-- **Input Data** - is the input or question that we are interested in finding a response for
+- **Input Data** - é a entrada ou pergunta para a qual estamos interessados em encontrar uma resposta
 
-- **Output Indicator** - indicates the type or format of output.
+- **Output Indicator** - Indica o tipo ou formato do output.
 
-Not all the components are required for a prompt, and the format depends on the task at hand. We will touch on more concrete examples in our upcoming guides.
+Nem todos os componentes são necessários para um prompt, e o formato depende da tarefa em questão. Abordaremos exemplos mais concretos nos nossos próximos guias.
 
 ---
 
-## Chat playground parameters
+## Parâmetros do Chat playground
 
-There are many parameters that you can adjust to change the performance of your model:
+Há muitos parâmetros que você pode ajustar para alterar o desempenho do seu modelo:
 
-- **Temperature** - Controls randomness. Lowering the temperature means that the model produces more repetitive and deterministic responses. Increasing the temperature results in more unexpected or creative responses. Try adjusting temperature or Top P but not both.
+- **Temperature** - Controla a aleatoriedade. A redução da temperatura significa que o modelo produz respostas mais repetitivas e determinísticas. O aumento da temperatura resulta em respostas mais inesperadas ou criativas. Tente ajustar a temperatura ou Top P, mas não ambos.
 
-- **Max length (tokens)e** - Set a limit on the number of tokens per model response. The API supports a maximum of 4000 tokens shared between the prompt (including system message, examples, message history, and user query) and the model's response. One token is roughly four characters for typical English text.
+- **Max length (tokens)e** - Defina um limite para o número de tokens por resposta do modelo. A API suporta um máximo de 4000 tokens compartilhados entre o prompt (incluindo mensagem do sistema, exemplos, histórico de mensagens e consulta do usuário) e a resposta do modelo. Um token tem aproximadamente quatro caracteres para o texto típico em inglês.
 
-- **Stop sequencese** - Make responses stop at a desired point, such as the end of a sentence or list. Specify up to four sequences where the model will stop generating further tokens in a response. The returned text won't contain the stop sequence.
+- **Stop sequence** - Faça com que as respostas parem em um ponto desejado, como o final de uma frase ou lista. Especifique até quatro sequências em que o modelo deixará de gerar mais tokens em uma resposta. O texto retornado não conterá a stop sequence.
 
-- **Top probabilities (Top P)e** - Similar to temperature, this controls randomness but uses a different method. Lowering Top P narrows the model’s token selection to likelier tokens. Increasing Top P lets the model choose from tokens with both high and low likelihood. Try adjusting temperature or Top P but not both.
+- **Top probabilities (Top P)e** - Semelhante à temperatura, este controla a aleatoriedade, mas usa um método diferente. A redução do Top P reduz a seleção de tokens do modelo para tokens mais prováveis. O aumento do Top P permite que o modelo escolha entre tokens com alta e baixa probabilidade. Tente ajustar a temperatura ou Top P, mas não ambos.
 
-- **Frequency penaltye** - Reduces the chance of repeating a token proportionally based on how often it has appeared in the text so far. This decreases the likelihood of repeating the exact same text in a response.
+- **Frequency penaltye** - Reduz a chance de repetir um token proporcionalmente com base na frequência com que ele apareceu no texto até agora. Isso diminui a probabilidade de repetir exatamente o mesmo texto em uma resposta.
 
-- **Presence penaltye** - Reduce the chance of repeating any token that has appeared in the text at all so far. This increases the likelihood of introducing new topics in a response.
+- **Presence penaltye** - Reduza a chance de repetir qualquer token que tenha aparecido no texto até agora. Isso aumenta a probabilidade de introduzir novos tópicos em uma resposta.
 
-- **Pre-response texte** - Insert text after the user’s input and before the model’s response. This can help prepare the model for a response.
+- **Pre-response text** - Insira texto após a entrada do usuário e antes da resposta do modelo. Isso pode ajudar a preparar o modelo para uma resposta.
 
-- **Post-response texte** - Insert text after the model’s generated response to encourage further user input, as when modeling a conversation.
+- **Post-response text** - Insira texto após a resposta gerada pelo modelo para incentivar a entrada do usuário, como ao modelar uma conversa.
 
-- **Max response** - Set a limit on the number of tokens per model response. The API supports a maximum of 4000 tokens shared between the prompt (including system message, examples, message history, and user query) and the model's response. One token is roughly four characters for typical English text.
+- **Max response** - Defina um limite para o número de tokens por resposta do modelo. A API suporta um máximo de 4000 tokens compartilhados entre o prompt (incluindo mensagem do sistema, exemplos, histórico de mensagens e consulta do usuário) e a resposta do modelo. Um token tem aproximadamente quatro caracteres para o texto típico em inglês.
 
-The Current token count is viewable from the Chat playground. Since the API calls are priced by token and it's possible to set a max response token limit, you'll want to keep an eye out for the current token count to make sure the conversation-in doesn't exceed the max response token count.
+A contagem de tokens atual pode ser visualizada no Chat playground. Como as chamadas de API são cobradas por token e é possível definir um limite máximo de token de resposta, convém ficar de olho na contagem atual de tokens para garantir que a conversa não exceda a contagem máxima de tokens de resposta
 
-## General Tips for Designing Prompts
+## Dicas gerais para criar prompts
 
 
-Here are some tips to keep in mind while you are designing your prompts:
+Aqui estão algumas dicas que você deve ter em mente ao projetar seus prompts:
 
-### Start Simple
-As you get started with designing prompts, you should keep in mind that it is an iterative process that requires experimentation to get optimal results. Using a simple playground like [Azure's OpenAI Studio's Playground](https://oai.azure.com/portal/playground) will allow you to test out ideas quickly and easily. The model won't be offended if you ask it to do very similar things over and over again!
+### Comece Simples
+Ao começar a criar prompts, você deve ter em mente que é um processo iterativo que requer experimentação para obter resultados ideais. Usar um playground como o [Azure's OpenAI Studio's Playground](https://oai.azure.com/portal/playground) permitirá que você teste ideias de forma rápida e fácil. O modelo não ficará ofendido se lhe pedir para fazer coisas muito semelhantes vezes sem conta!
 
-You can start with simple prompts and keep adding more elements and context as you aim for better results. Versioning your prompt along the way is vital for this reason. As we read the guide, you will see many examples where specificity, simplicity, and conciseness will often give you better results. Begin with a hardcoded prompt and move into more dynamically generated prompts as you refine your results.
+Você pode começar com prompts simples e continuar adicionando mais elementos e contexto à medida que busca melhores resultados. Versionar seu prompt ao longo do caminho é vital por esse motivo. Ao lermos o guia, você verá muitos exemplos em que a especificidade, a simplicidade e a consistência geralmente lhe darão melhores resultados. Comece com um prompt fixo e passe para prompts gerados mais dinamicamente à medida que refina seus resultados.
 
-### The Instruction
-You can design effective prompts for various simple tasks by using commands to instruct the model what you want to achieve, such as "Write", "Classify", "Summarize", "Translate", "Order", "Create", "make," etc.
+### A A Instrução
+Você pode projetar prompts eficazes para várias tarefas simples usando comandos para instruir o modelo sobre o que deseja alcançar, como "Escrever", "Classificar", "Resumir", "Traduzir", "Ordenar", "Criar", "Fazer", etc.
 
-Keep in mind that you also need to experiment a lot to see what works best. Try different instructions with different keywords, context, and data and see what works best for your particular use case and task. Usually, the more specific and relevant the context is to the task you are trying to perform, the better. 
+Tenha em mente que você também precisa experimentar muito para ver o que funciona melhor. Experimente instruções diferentes com palavras-chave, contexto e dados diferentes e veja o que funciona melhor para o seu caso de uso e tarefa específicos. Normalmente, quanto mais específico e relevante for o contexto para a tarefa que você está tentando executar, melhor. 
 
-Others recommend that instructions be placed at the beginning of the prompt. It's also recommended that some clear separators, like "###" be used to separate the instruction and context. 
+Outros recomendam que as instruções sejam colocadas no início do prompt. Também é recomendado que alguns separadores claros, como "###" sejam usados para separar a instrução e o contexto. 
 
-For instance:
+Por exemplo:
 
 *Prompt:*
 ```
@@ -262,12 +263,12 @@ Text: "hello!"
 Texto:¡Hola!
 ```
 
-### Specificity
-Be very specific about the instructions and tasks you want the model to perform. The more descriptive and detailed the prompt is, the better the results. This is particularly important when you have a desired outcome or style of generation you are seeking. There aren't specific tokens or keywords that lead to better results. It's more important to have a good format and a descriptive prompt. Providing examples in the prompt is very effective in getting the desired output in specific formats. 
+### Especificidade
+Seja muito específico sobre as instruções e tarefas que você deseja que o modelo execute. Quanto mais descritivo e detalhado for o prompt, melhores serão os resultados. Isso é particularmente importante quando você tem um resultado desejado ou estilo de geração que você está procurando. Não existem tokens ou palavras-chave específicas que levem a melhores resultados. É mais importante ter um bom formato e um prompt descritivo. Fornecer exemplos no prompt é muito eficaz para obter o output desejado em formatos específicos.
 
-When designing prompts, you should also keep in mind the length of the prompt, as there are limitations regarding how long this can be. Thinking about how specific and detailed you should be is something to consider. Too many unnecessary details are not necessarily a good approach. The details should be relevant and contribute to the task at hand. This is something you will need to experiment with a lot. We encourage a lot of experimentation and iteration to optimize prompts for your applications.
+Ao criar prompts, você também deve ter em mente o comprimento do prompt, pois há limitações em relação a quanto longo pode ser. Pensar em quão específico e detalhado você deve ser é algo a considerar. Demasiados pormenores desnecessários não são necessariamente uma boa abordagem. Os pormenores devem ser relevantes e contribuir para a tarefa em questão. Isso é algo que você vai precisar experimentar muito. Incentivamos muita experimentação e iteração para otimizar prompts para as suas aplicaçóes.
 
-As an example, let's try a simple prompt to extract specific information from a piece of text.
+Como exemplo, vamos tentar um prompt simples para extrair informações específicas de um pedaço de texto.
 
 *Prompt:*
 ```
@@ -289,13 +290,13 @@ Please make a table summarizing the fruits from Goocrux
 | Loopnovas | Neon pink | Cotton candy |
 | Glowls | Pale orange | Sour and bitter |
 ```
-> **Note:** The instructions are `Please make a table summarizing the fruits from Goocrux`, and then a sample table with column headings and two examples, with the correct elements in their respective columns, are supplied, making this a few-shot prompt.
+> **Nota:** As instruções são `Please make a table summarizing the fruits from Goocrux`, e então uma tabela de amostra com cabeçalhos de coluna e dois exemplos, com os elementos corretos em suas respetivas colunas, são fornecidos, tornando este um few-shot prompt.
 
-### Avoid Impreciseness
+### Evite imprecisões
 
-Given the tips above about being detailed and improving format, it's easy to fall into the trap of wanting to be too clever about prompts and potentially creating imprecise descriptions. It's often better to be specific and direct. The model doesn't mind you being explicit in your instructions; you can't offend it! The analogy here is very similar to effective communication: the more direct, the more effectively the message gets across.
+Dadas as dicas acima sobre como ser detalhado e melhorar o formato, é fácil cair na armadilha de querer ser muito inteligente sobre prompts e potencialmente criar descrições imprecisas. Muitas vezes é melhor ser específico e direto. O modelo não se importa que você seja explícito em suas instruções; você não pode ofendê-lo! A analogia aqui é muito semelhante à comunicação eficaz: quanto mais direta, mais eficazmente a mensagem é transmitida.
 
-For example, you might be interested in learning the concept of prompt engineering. You might try something like:
+Por exemplo, você pode estar interessado em aprender o conceito de prompt engineering. Você pode tentar algo como:
 *Prompt:*
 ```
 Provide a short explanation of what prompt engineering is in NLP without using technical language
@@ -321,10 +322,10 @@ engineering when interacting with a large language model using an 8th-grade read
 • Enhances scalability by allowing for the integration of more complex language models.
 ```
 
-### To do or not to do?
-Another common tip when designing prompts is to avoid saying what not to do but say what to do instead. This encourages more specificity and a focus on the details that lead to good responses from the model.
+### Fazer ou não fazer?
+Outra dica comum ao projetar prompts é evitar dizer o que não fazer, mas dizer o que fazer. Isso incentiva mais especificidade e foco nos detalhes que levam a boas respostas do modelo.
 
-Here is an example of an IT support chatbot failing to uphold our instructions because the instructions are phrased negatively. 
+Aqui está um exemplo de um chatbot de suporte de TI que não cumpre nossas instruções porque as instruções são formuladas negativamente. 
 
 *Prompt:*
 ```
@@ -339,7 +340,7 @@ IT Support Agent:
 Okay, I understand. Can you please tell me the email address you are trying to log in with?
 ```
 
-Here is a better prompt:
+Aqui está um prompt melhor:
 
 *Prompt:*
 ```
@@ -354,8 +355,8 @@ IT Support Agent:
 I apologize that you are having difficulty accessing your account. Please click on the "Forgot Password?" link on the sign-on page and follow the on-screen instructions to reset your password and access your account.
 ```
 
-Some of the examples above were adopted from the ["Best practices for prompt engineering with OpenAI API" article](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api) and the 
+Alguns dos exemplos acima foram adotados a partir do ["Best practices for prompt engineering with OpenAI API" article](https://help.openai.com/en/articles/6654000-best-practices-for-prompt-engineering-with-openai-api) e 
 [Democratizing Artificial Intelligence Research, Education, and Technologies's Prompt Engineering Guide](https://github.com/dair-ai/Prompt-Engineering-Guide)
 
 
-**Summary:** In this exercise, You learned how to create powerful prompts for AI models by examining the idea of prompt engineering in this assignment. Using Azure OpenAI Playground, you gained practical experience by experimenting with various prompt types and comprehending their components and design advice.
+**Summary:** Neste exercício, você aprendeu como criar prompts poderosos para modelos de IA examinando a ideia de prompt engineering nesta tarefa. Usando o Azure OpenAI Playground, você ganhou experiência prática experimentando vários tipos de prompt e compreendendo seus componentes e conselhos de design.

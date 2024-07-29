@@ -1,43 +1,39 @@
-# Exercise 4E: Glossary (Read-Only)
+# Exercício 4E: Glossário (Apenas leitura)
 
-*language model (LM)*
+*Modelo linguístico (language model - LM)*
 ```
-A probability distribution over sequences of words
-```
-
-*large language model (LLM)*
-```
-A large language model (LLM) is a type of machine learning model that can perform a variety of 
-natural language processing (NLP) tasks, including generating and classifying text, answering 
-questions in a conversational manner and translating text from one language to another.
-
-The label "large" refers to the number of values (parameters) the model can change autonomously as it learns.
+Distribuição de probabilidade sobre sequências de palavras
 ```
 
-*natural language processing (NLP)*
+*Modelo de Linguagem Grande (large language model - LLM)*
 ```
-Natural language processing (NLP) is the ability of a computer program to understand spoken and written human language.
+Um modelo de linguagem grande (LLM) é um tipo de modelo de aprendizagem de máquina que pode executar uma variedade de tarefas de processamento de linguagem natural (PNL), incluindo geração e classificação de texto, resposta perguntas de forma conversacional e tradução de texto de um idioma para outro.
 
-NLP programming automates the translation process between computers and humans by manipulating unstructured data (words)
-in the context of a specific task (conversation). An important goal of NLP is to help the computer comprehend 
-the intent -- as well as the meaning -- of a human being's written or spoken words.
+O rótulo "grande" refere-se ao número de valores (parâmetros) que o modelo pode alterar autonomamente à medida que aprende.
+```
+
+*Processamento de Linguagem Natural (PNL)*
+```
+Processamento de Linguagem Natural (NLP) é a capacidade de um programa de computador compreender a linguagem humana falada e escrita.
+
+A programação de PNL automatiza o processo de tradução entre computadores e seres humanos manipulando dados não estruturados (palavras) no contexto de uma tarefa específica (conversação). Um objetivo importante da PNL é ajudar o computador a compreender 
+a intenção – bem como o significado – das palavras escritas ou faladas de um ser humano.
 ```
 
 *prompt*
 ```
-A piece of text that is used to initiate or provide context for the generation of output
-This could be an input sentence, question, or topic to generate a response from the language model.
+Um pedaço de texto que é usado para iniciar ou fornecer contexto ao modelo de AI para a gerar uma resposta ou um output. Isso pode ser uma frase de entrada, pergunta ou tópico para gerar uma resposta do modelo de linguagem.
 ```
 
 *prompt engineering*
 ```
-The discipline concerned with developing and optimizing prompts to efficiently use language models (LMs)
-and large language models (LLMs).
+A disciplina para desenvolver e otimizar prompts para usar eficientemente modelos de linguagem (LMs)
+e grandes modelos linguísticos (LLMs).
 ```
 
 *token(s)*
 ```
-The token is an abstraction that is defined by external rules to identify the unit of processing in an NLP task.
-A token may be a word, part of a word, or just characters like punctuation. (e.g. 'abc ', 'abc.', ' st', etc)
+O token é uma abstração que é definida por regras externas para identificar a unidade de processamento em uma tarefa de PNL.
+Um token pode ser uma palavra, parte de uma palavra ou apenas caracteres como pontuação. (por exemplo, «abc», «abc.», «st», etc.)
 ```
 

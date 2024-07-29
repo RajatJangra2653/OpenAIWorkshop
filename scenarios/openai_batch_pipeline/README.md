@@ -1,74 +1,74 @@
-# Exercise 1: Build an Open AI Pipeline to Ingest Batch Data, Perform Intelligent Operations, and Analyze in Synapse
+# Exercício 1: Usar Open AI para Inserir dados em Bulk, Executar Operações Inteligentes, e Analisar Dados com Synapse
 
-### Summary
+### Sumário
 
 This scenario allows the use of OpenAI to summarize and analyze customer service call logs for the fictitious company, Contoso. The data is ingested into a blob storage account and then processed by an Azure function. The Azure Function will return the customer sentiment, the product offering the conversation was about, the topic of the call, as well as a summary of the call. These results are written in a separate, designated location in the blob storage. From there, Synapse Analytics is utilized to pull in the newly cleansed data to create a table that can be queried to derive further insights.
 
 ---
-# Table of Contents
-- [Build an Open AI Pipeline to Ingest Batch Data, Perform Intelligent Operations, and Analyze in Synapse](#build-an-open-ai-pipeline-to-ingest-batch-data-perform-intelligent-operations-and-analyze-in-synapse)
-- [Summary](#summary)
-- [Table of Contents](#table-of-contents)
-- [Architecture Diagram](#architecture-diagram)
-- [Deployment](#deployment)
-    - [Step 1. Ingest Data to Storage created in step 1](#step-1-Ingest-Data-to-Storage-account)
-    - [Step 2. Set up Synapse Workspace](#step-3-set-up-synapse-workspace)
-        - [a. Launch Azure Cloud Shell](#a-launch-azure-cloud-shell)
-        - [b. In the Cloud Shell run below commands:](#b-in-the-cloud-shell-run-the-below-commands)
-        - [c. Create Target SQL Table](#c-create-target-sql-table)
-        - [d. Create Source and Target Linked Services](#d-create-source-and-target-linked-services)
-        - [e. Create Synapse Data Flow](#e-create-synapse-data-flow)
-        - [f. Create Synapse Pipeline](#f-create-synapse-pipeline)
-        - [g. Trigger Synapse Pipeline](#g-trigger-synapse-pipeline)
-    - [Step 3. Query Results in Our SQL Table](#step-4-query-results-in-our-sql-table)
+# Índice
+- [Usar Open AI para Inserir dados em Bulk, Executar Operações Inteligentes, e Analisar Dados com Synapse](#build-an-open-ai-pipeline-to-ingest-batch-data-perform-intelligent-operations-and-analyze-in-synapse)
+- [Sumário](#summary)
+- [Índice](#table-of-contents)
+- [Diagrama de Arquitetura](#architecture-diagram)
+- [Implantação](#deployment)
+    - [Tarefa 1. Inserir Dados no Storage criado no passo 1](#step-1-Ingest-Data-to-Storage-account)
+    - [Tarefa 2. Configurar o Synapse Workspace](#step-3-set-up-synapse-workspace)
+        - [a. Lançar o Azure Cloud Shell](#a-launch-azure-cloud-shell)
+        - [b. No Cloud Shell execute os seguintes comandos:](#b-in-the-cloud-shell-run-the-below-commands)
+        - [c. Criar tabela SQL de destino](#c-create-target-sql-table)
+        - [d. Criar a Origem e Destino em Linked Services](#d-create-source-and-target-linked-services)
+        - [e. Criar Fluxo de dados em Synapse](#e-create-synapse-data-flow)
+        - [f. Criar um Pipeline em Synapse](#f-create-synapse-pipeline)
+        - [g. Executar um Pipeline em Synapse](#g-trigger-synapse-pipeline)
+    - [Tarefa 3. Resultados da Consulta na Nossa Tabela SQL ](#step-4-query-results-in-our-sql-table)
 
 
-# Architecture Diagram
+# Diagrama de Arquitetura
 
    ![](images/batcharch.png)
 
-Call logs are uploaded to a designated location in blob storage. This upload will trigger the Azure Function, which utilizes the [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/) for summarization, sentiment analysis, the product offering the conversation was about, the topic of the call, as well as a summary of the call. These results are written in a separate designated location in the blob storage. From there, Synapse Analytics is utilized to pull in the newly cleansed data to create a table that can be queried to derive further insights. 
+Os registros de chamadas são enviados para blob storage. Este envio aciona um Azure Functions, que usa o [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service/) para a sumarização, análise de sentimento, identificar o produto discutido na conversa, o tópico da chamada, bem como um resumo da chamada. Esses resultados são escritos novamente em blob storage. A partir daí, o Synapse Analytics é utilizado para importar os novos dados e criar uma tabela que pode ser consultada para obter mais Informações.
 
-## Task 1: Ingest Data to Storage account
+## Tarefa 1: Inserir Dados em Storage account
 
-### A. Launch Azure Cloud Shell
+### A. Lançar o Azure Cloud Shell
 
-1. In the [Azure portal](https://portal.azure.com?azure-portal=true), select the **[>_]** (*Cloud Shell*) button at the top of the page to the right of the search box. A Cloud Shell pane will open at the bottom of the portal.
+1. No [Portal de Azure](https://portal.azure.com?azure-portal=true), selecione o botão **[>_]** (*Cloud Shell*) que se encontra no topo da página a direita da pesquisa. O painel do Cloud Shell irá abrir na parte inferior do portal.
 
     ![](images/E2I1S1.png)
 
-2. The first time you open the Cloud Shell, you may be prompted to choose the type of shell you want to use (*Bash* or *PowerShell*). Select **Bash**. If you don't see this option, skip the step.
+2. Na primeira vez que abrir o Cloud Shell, pode ser solicitado que escolha o tipo de shell que deseja usar (*Bash* ou *PowerShell*). Selecione **Bash**. Se esta opção não abrir pode avançar para o próximo passo.
 
-3. Within the Getting Started pane, select **Mount storage account (1)**, select your **Storage account subscription (2)** from the dropdown and click **Apply (3)**.
+3. No painel Getting Started, selecione **Mount storage account (1)**, selecione **Storage account subscription (2)** na lista de opções e selecione **Apply (3)**.
 
    ![](images/10-06-2024(1).png)
 
-4. Within the **Mount storage account** pane, select **Select existing storage account (1)** and click **Next (2)**.
+4. No painel **Mount storage account**, selecione **Select existing storage account (1)** e clique **Next (2)**.
 
    ![](images/10-06-2024(2).png)
 
-5. Within the **Advanced settings** pane, enter the following details:
+5. No painel **Advanced settings**, introduza os seguintes detalhes:
 
-    - **Subscription**: Default- Choose the only existing subscription assigned for this lab (1).
-    - **Resource group**: Select **Use existing** **(2)**
+    - **Subscription**: Default- Escolha a única assinatura existente atribuída para este laboratório. (1).
+    - **Resource group**: Selecione **Use existing** **(2)**
       - openai-<inject key="DeploymentID" enableCopy="false"></inject>
-    - **Storage account**: Select **Use existing** **(3)**
+    - **Storage account**: Selecione **Use existing** **(3)**
       - openaistorage<inject key="DeploymentID" enableCopy="false"></inject>
     - **File share**: Create a new file share **(4)**
 
       ![](images/10-06-2024(3).png)
 
-1. Enter the file share name as **blob (1)**, and click on **Select (2)**.
+1. Introduza o nome para a file share **blob (1)**, e selecione **Select (2)**.
 
     ![](images/10-06-2024(4).png)
 
-1.  Once the storage account is created, you will be prompted with the Bash window, as shown in the below screenshot.
+1.  Assim que a storage account for criada, a janela Bash será exibida, conforme mostrado na capura de tela abaixo.
     
     ![](images/cloudshell.png)
 
-### B. Upload files to a storage account:
+### B. Carregar arquivos para a storage account:
 
-1. Run the following commands in the cloud shell to download and install Miniconda.
+1. Execute os seguintes comandos no Cloud Shell para fazer download e instalar o Miniconda. 
 
      ```bash 
      wget https://repo.anaconda.com/miniconda/Miniconda3-py39_23.1.0-1-Linux-x86_64.sh 
@@ -78,24 +78,24 @@ Call logs are uploaded to a designated location in blob storage. This upload wil
      sh Miniconda3-py39_23.1.0-1-Linux-x86_64.sh 
      ```
     
-    > **Note:** The following commands are issued in Bash; please ensure you are using **Bash** in the Cloud Shell.
+    > **Nota:** Os seguintes comandos são executados em Bash; certifique-se de que está a usar **Bash** na Cloud Shell.
     
-    > **Note:** Press the down arrow key to read or skip the license agreement.
+    > **Nota:** Pressione a tecla de seta para baixo para ler ou ignorar o acordo de licença.
 
-1. Type **yes** and hit **enter** to accept the agreement, and then hit enter to install on the default path.
+1. Digite **yes** e pressione **enter** para aceitar o acordo, e pressione enter para instalar na pasta padrão.
 
    ![](images/cloudshell-accept.png)
 
-1. Type **yes** and hit **enter** to initialize the conda environment.
+1. Digite **yes** e pressione **enter** para inicializar o ambiente conda.
 
     ![](images/E2T1PBS3.png)
 
-1. Run the following command to store the miniconda installed path to the variable.
+1. Execute o seguinte comando para armazenar o caminho de instalação do miniconda em uma variável.
 
     ```bash 
     export PATH=~/miniconda3/bin:$PATH
     ```
-1. Run the below commands to create and activate the conda environment in Cloudshell.
+1. Execute o seguinte comando para criar e ativar o ambiente conda na Cloudshell.
 
     ```bash 
     git clone https://github.com/microsoft/OpenAIWorkshop.git
@@ -105,19 +105,19 @@ Call logs are uploaded to a designated location in blob storage. This upload wil
     pip install --upgrade pip
     pip install -r reqs.txt
     ```
-    > **Note**: if you received **"Conda: command not found"** error, please close the CloudShell session and open a new session to continue.
+    > **Nota**: se receber o erro **"Conda: command not found"**, feche a sessão de CloudShell e abra uma nova sessão para continuar.
     
-1. Type **y** and hit enter to proceed.
+1. Digite **y** e pressione enter para prosseguir.
 
-1. In the [Azure portal](https://portal.azure.com), navigate to your Storage Account with the suffix `functions` resource by selecting the **openai-<inject key="DeploymentID" enableCopy="false"/>** resource group and selecting the Storage Account from the list of resources.
+1. No [Portal de Azure](https://portal.azure.com), navegue para a Storage Account com o sufixo `functions` selecionando o **openai-<inject key="DeploymentID" enableCopy="false"/>** resource group e selecione a Storage Account da lista de recursos.
 
     ![](images/storage-functions.png)
     
-1. Switch to the **Access keys (1)** blade and select **Show (2)**, which is next to the Connection String value. Select the copy button for the first **connection string (3)**. Paste the value into a text editor, such as Notepad.exe, for later reference.
+1. Mude para a janela **Access keys (1)** e selecione **Show (2)**, que está ao lado do valor da Connection String. Selecione o botão de copiar para a primeira **connection string (3)**. Cole o valor em um editor de texto, como o Notepad.exe, para referência futura."
 
    ![](images/storage-fuctions2.png)
 
-1. Go back to the cloud shell bash session and run the below command to upload the JSON files to the storage account by replacing the <CONNECTION_STRING> you copied in the previous step. This will take a few minutes to complete.
+1. Volte para a sessão Bash da Cloud Shell e execute o comando abaixo para fazer o upload dos arquivos JSON para a storage account, substituindo a <CONNECTION_STRING> copiada na etapa anterior. Este passo irá demorar alguns minutos para ser concluído.
 
     ```bash 
     python upload_docs.py --conn_string "<CONNECTION_STRING>"
@@ -125,25 +125,25 @@ Call logs are uploaded to a designated location in blob storage. This upload wil
 
    ![](images/batch_file_upload2.png)
 
-   > **Note**: Execute "cd OpenAIWorkshop scenarios/openai_batch_pipeline/document_generation" if you are not inside OpenAIWorkshop/scenarios/openai_batch_pipeline/document_generation directory.
-   
-1. Once you have successfully uploaded the JSON files to the storage account, you can navigate to the storage account in the Azure portal and verify that the files have been uploaded.
+   > **Nota**: Execute "cd OpenAIWorkshop scenarios/openai_batch_pipeline/document_generation" se não estiver na pasta OpenAIWorkshop/scenarios/openai_batch_pipeline/document_generation.
+
+1. Depois de fazer o upload dos arquivos JSON para a storage account com sucesso, pode navegar até a storage account no portal de Azure e verificar se os arquivos foram carregados.   
 
    ![](images/batch_file_upload.png)
 
-## Task 2: Set up Synapse Workspace
+## Tarefa 2: Configurar o Synapse Workspace
 
-### **A. Create Target SQL Table**
+### **A. Criar tabela SQL de destino**
 
-1. In the [Azure portal](https://portal.azure.com), navigate to **asaworkspace<inject key="DeploymentID" enableCopy="false"/>** synapse workspace from **openai-<inject key="DeploymentID" enableCopy="false"/>** resource group. From the **Overview** tab, click on **Open** to launch the Synapse workspace.
+1. No [Portal de Azure](https://portal.azure.com), navegue até ao synapse workspace **asaworkspace<inject key="DeploymentID" enableCopy="false"/>**  no resource group **openai-<inject key="DeploymentID" enableCopy="false"/>**. Na aba **Overview**, clique em **Open** para iniciar o Synapse workspace.
 
     ![](images/openai-5.png)
 
-1. Click into the **Develop (1)** section of the Synapse Studio, click the **+ (2)** sign in the top left, and select **SQL script (3)**. This will open a new window with a SQL script editor. 
+1. Clique na secção **Develop (1)** no Synapse Studio, clique em **+ (2)** sign in no topo esquerdo, e selecione **SQL script (3)**. Isto abrirá uma nova janela com um editor de script SQL. 
 
    ![](images/synapse3.png)
 
-1. Copy and paste the following script into the editor **(1)**, then change the **Connect to** value by selecting **openaisql (2)** from the drop-down, and for **Use database**, ensure that **openaisql (3)** is selected, and click the **Run (4)** button in the top-left corner, as shown in the picture below. Finish this step by pressing **Publish all (5)** just above the **Run** button to publish our work thus far.
+1. Copie e cole o seguinte script no editor **(1)**, em seguida, altere o valor **Connect to** selecionando **openaisql (2)** a partir da lista suspensa, e para **Use database**, confirme que **openaisql (3)** está selecionado, e clique no botão **Run (4)** no canto superior esquerdo, como mostra a imagem abaixo. Conclua esta etapa pressionando **Publish all (5)** logo acima do botão **Run** para publicar nosso trabalho até agora.
 
     ```SQL 
     CREATE TABLE [dbo].[cs_detail]
@@ -158,13 +158,13 @@ Call logs are uploaded to a designated location in blob storage. This upload wil
     
     ![](images/openai-6.png)
     
-1. Next, click on **Publish** to publish the SQL script.
+1. Em seguida, clique em **Publish** para publicar o script SQL.
 
     ![](images/publish-sqlscript.png)
 
-### **B. Create Source and Target Linked Services**
+### **B. Criar a Origem e Destino em Linked Services**
 
-We'll next need to create two linked services: one for our source (the JSON files in the Data Lake) and another for the Synapse SQL Database that houses the table we created in the previous step.
+Em seguida, precisaremos criar dois linked services: um para nossa origem (os arquivos JSON no Data Lake) e outro para o Banco de Dados SQL Synapse que contem a tabela que criamos na etapa anterior.
 
 1. Click back into the **Manage (1)** section of the Synapse Studio and click the **Linked services (2)** option under the **External connections** section. Then click **+ New (3)** in the top-left.
 
@@ -294,25 +294,25 @@ Then expand the **Staging (3)** section at the bottom of the settings and utiliz
 
 4. Then click **Publish all** to publish your changes and save your progress.
 
-### **E. Trigger Synapse Pipeline**
+### **E. Executar um Pipeline em Synapse**
 
-1. Once you have successfully published your work, we need to trigger our pipeline. To do this, just below the tabs at the top of the studio, there is a *lightning bolt* icon that says **Add trigger (1)**. Click to add a trigger and select **Trigger now (2)** to begin a pipeline run then when the window opens up click on **OK**.
+1. Depois de publicar com sucesso o seu trabalho, precisamos iniciar o nosso pipeline. Para fazer isso, logo abaixo dos separadores na parte superior do Studio, há um ícone de *raio* que diz **Add trigger (1)**. Clique para adicionar um trigger e selecione **Trigger now (2)** para iniciar uma execução de pipeline e, quando a janela abrir, clique em **OK**.
 
     ![](images/trigger-1.png)
     
-2. To look at the pipeline run, navigate to the left-hand side of the screen and choose the **Monitor (1)** option. Then select the **Pipeline runs (2)** option in the **Integration** section. You will then see the pipeline run that you have triggered under the **Triggered (3)** section as **pipeline 1 (4)**. This pipeline should take approximately 4 minutes (if you are using the uploaded data for the workshop).
+2. Para ver a execução do pipeline, navegue até o lado esquerdo da tela e escolha a opção **Monitor (1)**. Em seguida, selecione a opção **Pipeline runs (2)** na seção **Integration**. Em seguida, você verá a execução do pipeline que você acionou na seção **Triggered (3)** como **pipeline 1 (4)**.  Este pipeline deve levar aproximadamente 4 minutos (se você estiver usando os dados carregados para o workshop).
 
    ![](images/pipeline-run-1.png)
 
-## Task 3: Query Results in Our SQL Table
+## Task 3: Resultados da Consulta na Nossa Tabela SQL
 
-1. Ensure that your pipeline run status has **Succeeded**.
+1. Certifique-se de que o status de execução do pipeline tenha **Succeeded**.
 
     ![](images/pipline-succeeded.png)
 
-2. Now that the data is in the target table, it is available for usage by running SQL queries against it or connecting PowerBI and creating visualizations. The Azure Function is running as well, so try uploading some of the transcript files to the generated_documents folder in your container and see how the function processes it and creates a new file in the cleansed_documents file.
+2. Agora que os dados estão na tabela de destino, eles estão disponíveis para uso executando consultas SQL em relação a eles ou conectando o PowerBI e criando visualizações. A Azure Function também está em execução, portanto, tente carregar alguns dos arquivos de transcrição para a pasta generated_documents em seu container e veja como a função a processa e cria um novo arquivo na pasta cleansed_documents.
 
-3. To query the new data, navigate to the menu on the left-hand side, and choose **Develop (1)**. Click on the existing **SQL Script (2)** and replace the content with the **SQL Code (3)** below. Then select **openaisql (4)** pool **Run (5)**. 
+3. Para consultar os novos dados, navegue até o menu do lado esquerdo e escolha **Develop (1)**. Clique no **SQL Script (2)** existente e substitua o conteúdo pelo **SQL Code (3)** abaixo. Em seguida, selecione **openaisql (4)** pool **Run (5)**. 
 
      ```SQL 
     SELECT sentiment, count(*) as "Sum of Sentiment"
@@ -321,6 +321,6 @@ Then expand the **Staging (3)** section at the bottom of the settings and utiliz
     ORDER BY count(*) desc     
      ```
 
-   - Your query results, if you are using the files uploaded as part of this repository or the workshop, you should see similar **Results (6)** to those below.
+   - Os resultados da sua consulta, se você estiver usando os arquivos carregados como parte deste repositório ou do workshop, você verá **Results (6)** semelhantes aos abaixo.
 
       ![](images/lastpic.png)

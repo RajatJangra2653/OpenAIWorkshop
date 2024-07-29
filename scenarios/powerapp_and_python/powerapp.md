@@ -1,69 +1,69 @@
-# Exercise 2: Build an Open AI application with Power App 
+# Exercício 2: Crie uma aplicação Open AI com Power Apps
 
-1. Navigate to https://make.powerapps.com/. On **Welcome to Power Apps**, select your **Country/Region (1)** and click **Get Started (2)**. 
+1. Navegue até https://make.powerapps.com/. Em **Welcome to Power Apps**, selecione o seu **Country/Region (1)** e clique em **Get Started (2)**. 
 
    ![](./images/welcome-1.png)
-    
-2. Select **Apps** on the left navigation and click **Import canvas app**. 
+     
+2. Selecione **Apps** na navegação à esquerda e clique em **Import canvas app**. 
 
     ![](./images/powerapps-import.png)
 
-3. On the **Import package** page, click on **Upload**.
+3. Na página **Import package**, clique em **Upload**.
 
     ![](./images/upload-importpackage.png)
 
-4. Navigate to `C:\labfile\OpenAIWorkshop-main\OpenAIWorkshop-main\scenarios\powerapp_and_python\powerapp` Select the **OpenAI-Playground_20230302010547.zip (1)** folder and click on **Open (2)**.
+4. Navegue até `C:\labfile\OpenAIWorkshop-main\OpenAIWorkshop-main\scenarios\powerapp_and_python\powerapp` Selecione a pasta  **OpenAI-Playground_20230302010547.zip (1)** e clique em **Open (2)**.
 
      ![](./images/openai-play.png)
 
-5. Once the zip file is uploaded, in the **Review Package Content** for **OpenAI Playground**, click on the setup icon under **Actions**.
+5. Uma vez que o arquivo zip é carregado, no **Review Package Content** para **OpenAI Playground**, clique no ícone de configuração em **Actions**.
 
      ![](./images/review-package-content.png)
 
-6. In the **Import setup** pane, select **Create as new (1)** from the drop-down for **Setup** and click on **Save (2)**.
+6. No painel **Import setup**, selecione **Create as new (1)** na lista suspensa para **Setup** e clique em **Save (2)**.
 
       ![](./images/import-setup-1.png)
 
-7. Repeat Steps 5 and 6 for **Openaisummarization**.
+7. Repita os passos 5 e 6 para **Openaisummarization**.
 
-8. Next, click on **Import** to import the package into the PowerApps environment.
+8. Em seguida, clique em **Import** para importar o pacote para o ambiente PowerApps.
 
    ![](./images/import-openai-package.png)
 
-9. Once the import is completed, click on **Apps (1)**, then click on `...` **(2)** next to **OpenAI Playground**, and click on **Edit (3)**.
+9. Quando a importação estiver concluída, clique em **Apps (1)**, clique em `...` **(2)** ao lado de **OpenAI Playground**, e clique em **Edit (3)**.
 
       ![](./images/powerapps-apps-edit.png)
 
-   >**Note**: If you're unable to see the **OpenAI Playground** option, please wait for 5 minutes, and in the meantime, try refreshing the page.
+   >**Nota**: Se você não conseguir ver a opção **OpenAI Playground**, aguarde 5 minutos e, enquanto isso, tente atualizar a página.
 
-10. You will observe that it has imported the Power App canvas app and the Power Automate Flow into the workspace.
+10. Você observará que ele importou o aplicativo de tela do Power Apps e o Power Automate Flow para o espaço de trabalho.
 
       ![](./images/powerapps-apps-view.png)
 
-11. To navigate back, click on **Back (1)**, then click **Leave (2)**.
+11. Para voltar atrás, clique em **Back (1)**, depois clique em **Leave (2)**.
 
       ![](./images/powerapps-apps-exit.png)
 
-12. Next, on the **Flows (1)** tab, select **Openaisummarization (2)**, then click on `...` **(3)** and **Turn on (4)** your flow.
+12. Em seguida, no tabulador **Flows (1)**, selecione **Openaisummarization (2)**, depois clique em `...` **(3)** e **Turn on (4)** seu flow.
 
       ![](./images/flow-on.png)
 
-13. Click on **Edit** for Openaisummarization.
+13. Clique em **Edit** para Openaisummarization.
 
       ![](./images/flow-edit.png)
 
-14. Edit the Power Automate Flow HTTP step by updating the **https://your-resource-name.openai.azure.com/** with **<inject key="OpenAIEndpoint" enableCopy="true"/>** **(1)**, **deployment-id** with **<inject key="openaimodulename" enableCopy="true"/>** **(2)**, **api-version** with **2023-09-15-preview** **(3)**, **YOUR_API_KEY** with **<inject key="OpenAIKey" enableCopy="true"/>** **(4)**, and click on **Save** **(5)**.
+14. Edite o passo HTTP do Power Automate Flow atualizando **https://your-resource-name.openai.azure.com/** com **<inject key="OpenAIEndpoint" enableCopy="true"/>** **(1)**, **deployment-id** com **<inject key="openaimodulename" enableCopy="true"/>** **(2)**, **api-version** com **2023-09-15-preview** **(3)**, **YOUR_API_KEY** com **<inject key="OpenAIKey" enableCopy="true"/>** **(4)**, e clique em **Save** **(5)**.
 
       ![](./images/update-values.png)
    
-15. From the **Apps (1)** page, click on the **OpenAI Playground** app to run the app by clicking on the **Play (2)** button.
+15. Na página **Apps (1)**, selecione a applicação **OpenAI Playground** para executar o aplicativo clicando no botão **Play (2)**.
 
      ![](./images/canves-play.png)
 
-16. If you get a popup asking to start a free trial, click on **Star a Free Trial**, then on **You need a Power Apps license to use this app** window select **Start a 30-day trial**. choose your region from the drop-down menu and click on the **Get started** button wait for 2-3 minutes It might take to start the trial.
+16. Se você receber um pop-up pedindo para iniciar uma avaliação gratuita, clique em **Star a Free Trial**, em seguida, em **You need a Power Apps license to use this app** selecione **Start a 30-day trial**. Escolha a sua região no menu e clique no botão **Get started** aguarde 2-3 minutos. Pode demorar a iniciar a versão experimental.
     
-17. In the **Canvas**, click on **Summary** **(1)** button and verify the **auto-filled text** **(2)**. Then click on the **Submit** **(3)** button to get the desired **Summary** **(4)**.
+17. No **Canvas**, clique no botão **Summary** **(1)** e verifique o **auto-filled text** **(2)**. Em seguida, clique no botão **Submit** **(3)** para obter o **Summary** **(4)**.
 
      ![](./images/canves-output.png)
 
-    > **Note**: You can try the other available options in the portal, i.e., **SQL**, **ClassifyText**, **Parse**, and **Classify**.
+    > **Nota**: Você pode tentar as outras opções disponíveis no portal, ou seja, **SQL**, **ClassifyText**, **Parse**, e **Classify**.
