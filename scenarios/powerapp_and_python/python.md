@@ -26,7 +26,7 @@ Neste laboratório, os participantes desenvolverão uma aplicação usando APIs 
 
     ![](images/openai-sparkpool.png)
 
-1. Execute o bloco de anotações passo a passo para concluir este exercício. Clique no botão **Run** ao lado da célula.
+1. Execute o notebook passo a passo para concluir este exercício. Clique no botão **Run** ao lado da célula.
 
      ![](images/run.png)
 
