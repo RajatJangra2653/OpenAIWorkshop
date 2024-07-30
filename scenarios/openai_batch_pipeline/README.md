@@ -2,7 +2,7 @@
 
 ### Sumário
 
-This scenario allows the use of OpenAI to summarize and analyze customer service call logs for the fictitious company, Contoso. The data is ingested into a blob storage account and then processed by an Azure function. The Azure Function will return the customer sentiment, the product offering the conversation was about, the topic of the call, as well as a summary of the call. These results are written in a separate, designated location in the blob storage. From there, Synapse Analytics is utilized to pull in the newly cleansed data to create a table that can be queried to derive further insights.
+Esse cenário permite o uso do OpenAI para resumir e analisar os logs de chamadas de atendimento ao cliente para a empresa fictícia - Contoso. Os dados são inseridos numa blob storage account e, em seguida, processados por uma Azure Function. Baseado no texto do log das chamadas, a Azure Function retornará o sentimento do cliente, o produto sobre o qual a conversa foi abordada, o tópico da chamada, bem como um resumo da chamada. Esses resultados são gravados em um local separado em blob storage. A partir daí, o Synapse Analytics é utilizado para extrair os dados e para criar uma tabela que pode ser consultada para obter mais informações.
 
 ---
 # Índice
@@ -166,133 +166,133 @@ Os registros de chamadas são enviados para blob storage. Este envio aciona um A
 
 Em seguida, precisaremos criar dois linked services: um para nossa origem (os arquivos JSON no Data Lake) e outro para o Banco de Dados SQL Synapse que contem a tabela que criamos na etapa anterior.
 
-1. Click back into the **Manage (1)** section of the Synapse Studio and click the **Linked services (2)** option under the **External connections** section. Then click **+ New (3)** in the top-left.
+1. Clique novamente na seção **Manage (1)** do Synapse Studio e clique na opção **Linked services (2)** na seção **External connections**. Em seguida, clique em **+ New (3)** no canto superior esquerdo.
 
    ![](images/synapse5.png)
    
-1. Start by creating the linked services for the source of our data, the JSON files housed in the ADLS Gen2 storage we created with our initial template. In the search bar that opens after you click New, search for **blob (1)**, select **Azure Blob Storage (2)** as depicted below, and click on **Continue (3)**.
+1. Somece criando os linked services para a nossa fonte de dados, usando os arquivos JSON alojados no armazenamento ADLS Gen2 que criamos com nosso modelo inicial. Na barra de pesquisa que é aberta depois de clicar em Novo, procure **blob (1)**, selecione **Azure Blob Storage (2)** conforme descrito abaixo e clique em **Continue (3)**.
 
    ![](images/synapse6.png)
 
-1. Provide the name for your linked service as **openailinkedservice (1)**. Change the **Authentication type** to **Account key (2)**. Then select the **subscription (3)** you have been working in, and finally select the storage account with the suffix **functions (4)** that you created in the initial template and loaded the JSON files into then click on **Test connection (5)**. Once the connection is successful, click the **Create (6)** button in blue on the bottom left of the New linked service window.
+1. Forneça o nome do seu linked service como **openailinkedservice (1)**. Altere o **Authentication type** para **Account key (2)**. Em seguida, selecione a **subscription (3)** em que você está trabalhando e, finalmente, selecione a storage account com o sufixo **functions (4)** que você criou no modelo inicial e carregou os arquivos JSON em seguida, clique em **Test connection (5)**. Quando a conexão for bem-sucedida, clique no botão **Create (6)** em azul no canto inferior esquerdo da janela novo linked service.
 
    ![](images/img-6.png)
 
-1.  Click **+ New** in the top-left. Search for **Synapse (1)**, select **Azure Synapse Analytics (2)**, and click on **Continue (3)**.
+1.  Clique em **+ New** no canto superior esquerdo. Procure **Synapse (1)**, selecione **Azure Synapse Analytics (2)**, e clique em **Continue (3)**.
 
      ![](images/synapse8.png)
 
-1. In the *New linked service* window that opens, fill in a name for your target linked service as **synapselinkedservice** **(1)**. Select the **Azure subscription (2)** for which you have been working. Select the **asaworkspace<inject key="DeploymentID" enableCopy="false"/> (3)** for **Server name** and **openaisql (4)** as the **Database name**. Be certain to change the **Authentication type** to **System Assigned Managed Identity (5)**, then click on **Test connection (6)** and click **Create (7)**.
+1. Na janela *New linked service* que se abre, preencha um nome para o target linked service como **synapselinkedservice** **(1)**. Selecione a **Azure subscription (2)**  na qual você tem trabalhado. Selecione **asaworkspace<inject key="DeploymentID" enableCopy="false"/> (3)** para **Server name** e **openaisql (4)** como o **Database name**. Certifique-se de alterar o **Authentication type** para **System Assigned Managed Identity (5)**, depois clique em **Test connection (6)** e clique em **Create (7)**.
 
     ![](images/synapse-1.png)
 
-1. Once you have created the two linked services, be certain to press the **Publish all** button at the top to publish our work. Finalize the creation of the linked services and click **Publish**.
+1. Depois de criar os dois linked services, certifique-se de pressionar o botão **Publish all** na parte superior para publicar o nosso trabalho. Finalize a criação dos linked services e clique em **Publish**.
 
    ![](images/publish-linked.png)
    
 ### **C. Create Synapse Data Flow**
 
-While still within the Synapse Studio, we will now need to create a **Data flow** to ingest our JSON data and write it to our SQL database. For this workshop, this will be a very simple data flow that ingests the data, renames some columns, and writes it back out to the target table.
+Ainda dentro do Synapse Studio, agora precisaremos criar um **Data flow** para inserir os nossos dados JSON e gravá-los em nosso banco de dados SQL. Para este workshop, este será um fluxo de dados muito simples que insere os dados, renomeia algumas colunas e os grava de volta na tabela de destino.
 
-1. First, we'll want to go back to the **Develop (1)** tab, select **+ (2)**, and then **Data flow (3)**.
+1. Primeiro, vamos querer voltar para o separador **Develop (1)**, selecionar **+ (2)**, e depois **Data flow (3)**.
 
    ![](images/synapse11.png)
    
-1. Once the data flow editor opens, click **Add Source**. A new window will open at the bottom of the screen. Select **+ New** on the **Dataset** row while leaving the other options as default.
+1. Quando o editor de fluxo de dados abrir, clique em **Add Source**. Uma nova janela será aberta na parte inferior da tela. Selecione **+ New** na linha **Dataset** deixando as outras opções como padrão.
 
    ![](images/synapse12.png)
 
-1. A new window should open on the right side of your screen. Next, search for **Azure Blob Storage (1)**, select **Azure Blob Storage (2)**, and then click on **Continue (3)**.
+1. Uma nova janela deve ser aberta no lado direito da tela. Em seguida, procure por **Azure Blob Storage (1)**, selecione **Azure Blob Storage (2)**, e clique em **Continue (3)**.
    
    ![](images/synapse13-1.png)
 
-1. Next, select the **JSON (1)** option as our incoming data is in JSON format and click **Continue (2)**.
+1. Em seguida, selecione a opção **JSON (1)** pois os nossos dados de entrada estão no formato JSON e clique em **Continue (2)**.
 
    ![](images/synapse14-1.png)
 
-1. Select the Linked Service with the name **openailinkedservice (1)** we just set up in the steps above. You will need to select the proper **File path** to select the directory where our JSON files are stored. It should be something to the effect of **workshop-data / cleansed_documents (2)**. Click on the **OK** button to close the window.
+1. Selecione o Linked Service com o nome **openailinkedservice (1)** que acabamos de configurar nas etapas acima. Você precisará selecionar a **File path** para escolher o diretório onde nossos arquivos JSON estão armazenados. Deve ser algo semelhante a **workshop-data / cleansed_documents (2)**. Clique no botão **OK** para fechar a janela.
 
    ![](images/synapse15.png)
    
-1. Next, we'll need to move to the **Source options (1)** panel and drop down the **JSON settings (2)** options. We need to change the **Document form** option to the **Array of documents (3)** setting. This allows our flow to read each .JSON file as a separate entry into our database.
+1. Em seguida, precisaremos ir para o painel **Source options (1)** e listar as opções **JSON settings (2)**. Precisamos alterar a opção **Document form** para a configuração **Array of documents (3)**. Isso permite que nosso fluxo leia cada arquivo JSON como uma entrada separada em nosso banco de dados.
 
    ![](images/synapse16.png)   
 
-1. Enable the toggle **data flow debug** session located at the top menu bar adjacent to the validate button, and click on **OK** on the *Turn on data flow debug* pop-up window.
+1. Ativar a opção **data flow debug** localizada na barra de menu superior adjacente ao botão validar e clique em **OK** na janela pop-up *Turn on data flow debug*.
 
-    >**Note:** It will take a minute or two for the **data flow debug** session to get enabled.
+    >**Nota:** Levará um ou dois minutos para que a sessão **data flow debug** seja ativada.
 
-1. Now head to the **Data preview** tab and run a preview to check your work thus far.
+1. Navegue até ao separador **Data preview** e execute uma visualização para verificar seu trabalho até agora.
     
     ![](images/dataflow-datapreview.png)
 
-    >**Note**: If you're unable to view data under the Data Preview tab, please click on the Refresh button repeatedly until the data appears.
+    >**Nota**: Se não conseguir visualizar os dados no separador Data Preview, clique no botão Atualizar até os dados aparecerem.
    
-1. Next, we can add in our **Select** tile and do our minor alterations before writing the data out to the Synapse SQL table. To begin, click the small **+ (1)** sign next to our ingestion tile and choose the **Select (2)** option.
+1. Em seguida, podemos adicionar no nosso bloco **Select** e fazer nossas pequenas alterações antes de gravar os dados na tabela Synapse SQL. Para começar, clique no pequeno sinal **+ (1)** ao lado do nosso bloco de ingestão e escolha a opção **Select (2)**.
 
    ![](images/synapse17.png)
 
-1. We can leave all the settings as defaults. Next, we'll add in our **Sink** tile. This is the step that will write our data out to our Synapse SQL database. Click on the small **+ (1)** sign next to our **Select** tile. Scroll all the way to the bottom of the options menu and select the **Sink (2)** option.
+1. Podemos deixar todas as configurações como padrão. Em seguida, adicionaremos nosso bloco **Sink**. sta é a etapa que gravará nossos dados em nosso banco de dados Synapse SQL. Clique no pequeno sinal **+ (1)** o lado do nosso bloco **Select**. até a parte inferior do menu de opções e selecione a opção **Sink (2)**.
 
    ![](images/synapse18.png)
 
-1. Once the **Sink (1)** tile opens, choose **Inline (2)** for the *Sink type*. Then select **Azure Synapse Analytics (3)** for the *Inline dataset type*, and for the **Linked service**, select **Synapselinkedservice (4)**, which was created in the previous step. Ensure to run **Test connection (5)** for the linked service.
+1. Quando o bloco **Sink (1)** abrir, escolha **Inline (2)** para o *Sink type*. Em seguida, selecione **Azure Synapse Analytics (3)** para o *Inline dataset type*, e para o **Linked service**, selecione **Synapselinkedservice (4)**, que foi criado na etapa anterior. Certifique-se de executar **Test connection (5)** para o linked service.
 
    ![](images/sink-1.png)
 
-   > **Note**: If the test connection takes more than 3–4 minutes, follow the below steps.
+   > **Nota**: Se a conexão de teste demorar mais de 3 a 4 minutos, siga as etapas abaixo.
 
-   - Click on **Edit**.
+   - Clique em **Edit**.
 
      ![](images/p18.png)    
 
-   - In the Edit linked service window that opens, select the Azure selection method as **From Azure subscription** **(1)**. Select the **Azure subscription (2)** for which you have been working. Select the **asaworkspace<inject key="DeploymentID" enableCopy="false"/> (3)** for **Server name** and **openaisql (4)** as the **Database name**, and then click on **Test connection (5)** and click **Save (6)**.
+   - Na janela Editar linked service que é aberta, selecione o método de seleção do Azure como **From Azure subscription** **(1)**. Selecione a **Azure subscription (2)** para a qual você tem trabalhado. Selecione **asaworkspace<inject key="DeploymentID" enableCopy="false"/> (3)** para **Server name** e **openaisql (4)** como o **Database name**, clique em **Test connection (5)** e clique em **Save (6)**.
 
      ![](images/p19.png)
 
-1. We will then need to head over to the **Settings (1)** tab and adjust the **Schema name** and **Table name**. If you utilized the script provided earlier to make the target table, the Schema name is **dbo (1)** and the Table name is **cs_detail (2)**.
+1. Em seguida, precisaremos ir para o separador **Settings (1)** e ajustar o **Schema name** e **Table name**. Se você utilizou o script fornecido anteriormente para criar a tabela de destino, o nome do esquema é **dbo (1)** e o nome da tabela é **cs_detail (2)**.
 
     ![](images/synapse20.png)
 
-1. Before we finish our work on the data flow, we should preview our data. Previewing our data reveals we only have 3 columns when we are expecting a total of 5. We have lost our Summary and Sentiment columns.
+1. Antes de terminarmos nosso trabalho sobre o data flow, devemos visualizar nossos dados. A pré-visualização dos nossos dados revela que só temos 3 colunas quando esperamos um total de 5. Perdemos as nossas colunas Summary e Sentiment.
 
     ![](images/data-preview.png)
 
-1. To correct this, let's use our **Select (1)** tile to change the names as follows to get the expected output values:
+1. Para corrigir isso, vamos usar nosso bloco **Select (1)** para alterar os nomes da seguinte forma para obter os valores de saída esperados:
 
      - **Summary**: `interaction_summary` **(2)**
      - **CustomerSentiment**: `sentiment` **(3)**
 
         ![](images/select-1.png)
     
-1. If we return to our **Sink (1)** tile and under **Data preview (2)** click **Refresh (3)**, we will now see our expected 5 columns of output.
+1. Retornando ao bloco **Sink (1)** por baixo de **Data preview (2)** clique **Refresh (3)**, vamos agora ver as 5 colunas que são esperadas.
 
     ![](images/refresh-sink-1.png)
 
-1. Once you have reviewed the data and are satisfied that all columns are mapped successfully (you should have 5 columns total, all showing data in a string format), we can press **Publish all** at the top to save our current configuration. A window will open on the right side of the screen; press the blue **Publish** button at the bottom left of it to save your changes.
+1. Depois de revisar os dados e estar satisfeito que todas as colunas foram mapeadas com êxito (você deve ter 5 colunas no total, todas mostrando dados em um formato tipo string), podemos selecionar **Publish all** na parte superior para salvar nossa configuração atual. Uma janela será aberta no lado direito da tela; pressione o botão azul **Publish** na parte inferior esquerda para salvar suas alterações.
 
     ![](images/publish-dataflow.png)
 
-1. Your completed and saved Data flow will look like the following:
+1. O seu Data flow  concluído e salvo terá a seguinte aparência:
 
     ![](images/completed-dataflow.png)
 
-### **D. Create Synapse Pipeline**
+### **D. Criar um Pipeline em Synapse**
 
-1. Once we have created our **Data flow**, we will need to set up a **Pipeline** to house it. To create a **Pipeline**, navigate to the left-hand menu bar and choose the **Integrate (1)** option. Then click the **+ (2)** at the top of the Integrate menu to **Add a new resource** and choose **Pipeline (3)**.
+1. Depois de criarmos o nosso **Data flow**, precisaremos configurar um **Pipeline** para alojar o Data Flow. Para criar um **Pipeline**,  navegue até a barra de menu à esquerda e escolha a opção **Integrate (1)**. Em seguida, clique no botão **+ (2)** a parte superior do menu Integrate para **Add a new resource** e escolha **Pipeline (3)**.
 
    ![](images/new-pipeline-1.png)
 
-2. Next, we need to add a **Data flow** to our Pipeline. With your new **Pipeline tab (1)** open, go to the **Activities** section and search for `data` **(2)** and select **Data flow (3)** activity and **drag-and-drop (4)** it into your Pipeline.
+2. Em seguida, precisamos adicionar um **Data flow** ao nosso Pipeline. Com o novo separador **Pipeline tab (1)** aberto, vá para a seção **Activities** e procure por `data` **(2)** e selecione a atividade **Data flow (3)** e **drag-and-drop (4)** no seu Pipeline.
 
    ![](images/data-drag-1.png)
 
-3. Under the **Settings (1)** tab of the **Data flow**, select the **Data flow (2)** drop-down menu and select the name of the data flow you created in the previous step. 
-Then expand the **Staging (3)** section at the bottom of the settings and utilize the drop-down menu for the **Staging linked service**. Choose the linked service you created **openailinkedservice (4)** to ensure the **Test connection (5)**. Next, set a **Staging storage folder** at the very bottom and enter **workshop-data/Staging** **(6)**.
+3. No separador **Settings (1)** do **Data flow**, selecione o menu **Data flow (2)** e selecione o nome do fluxo de dados criado na etapa anterior. 
+Em seguida, expanda a seção **Staging (3)** na parte inferior das configurações e utilize o menu suspenso para o **Staging linked service**. Escolha o linked service que você criou **openailinkedservice (4)** para garantir a **Test connection (5)**. Em seguida, defina uma **Staging storage folder** na parte inferior e digite **workshop-data/Staging** **(6)**.
 
    ![](images/staging-1.png)
 
-4. Then click **Publish all** to publish your changes and save your progress.
+4. Em seguida, clique em **Publish all** para publicar as alterações efetuadas e salvar o seu progresso.
 
 ### **E. Executar um Pipeline em Synapse**
 
