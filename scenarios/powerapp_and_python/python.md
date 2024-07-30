@@ -36,7 +36,7 @@ Neste laboratório, os participantes desenvolverão uma aplicação usando APIs 
 
       > **Nota**: talvez seja necessário reiniciar o kernel para usar pacotes atualizados
 
-1. Em **2. Import helper libraries and instantiate credentials**, e substitua **AZURE_OPENAI_API_KEY** e **AZURE_OPENAI_ENDPOINT** pela sua API key e endpoint URL.
+1. Em **2. Import helper libraries and instantiate credentials**, substitua **AZURE_OPENAI_API_KEY** e **AZURE_OPENAI_ENDPOINT** pela sua API key e endpoint URL.
 
      ![](images/key-endpoint.png)
    
