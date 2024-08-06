@@ -1,4 +1,4 @@
-# Ejercicio 2: Cree una aplicación Open AI con Power App
+# Ejercicio 2: Crear una aplicación Open AI con Power App
 
 1. Navegue a https://make.powerapps.com/. En **Bienvenido a Power Apps**, seleccione su **País/Región (1)** y haga clic en **Comenzar (2)**. 
 

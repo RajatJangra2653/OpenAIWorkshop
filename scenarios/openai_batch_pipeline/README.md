@@ -1,27 +1,16 @@
 # Ejercicio 1: Crear un pipeline de Open AI para Ingerir Datos por Lotes, Realizar Operaciones Inteligentes y Analizar en Synapse
 
-### Resumen
+### Duración Estimada: 90 minutos
 
-Este escenario permite el uso de OpenAI para resumir y analizar los registros de llamadas de servicio al cliente para la empresa ficticia Contoso. Los datos se incorporan a una cuenta de almacenamiento de blobs y luego se procesan mediante una Azure Function. La Azure Function devolverá el sentimiento del cliente, la oferta de producto sobre la que versaba la conversación, el tema de la llamada y un resumen de la llamada. Estos resultados se escriben en una ubicación designada separada en el almacenamiento de blobs. A partir de ahí, se utiliza Synapse Analytics para extraer los datos recién depurados y crear una tabla que pueda consultarse para obtener más información.
+Este laboratorio tiene como objetivo demostrar cómo integrar las capacidades de OpenAI en Azure Synapse Analytics para procesar datos por lotes, realizar operaciones inteligentes como el procesamiento del lenguaje natural o el análisis predictivo, y analizar los resultados de manera eficiente dentro del entorno de Synapse.
 
----
-# Índice
-- [Construir un Pipeline de Open AI para Ingerir Datos por Lotes, Realizar Operaciones Inteligentes y Analizar en Synapse](#ejercicio-1-crear-un-pipeline-de-open-ai-para-ingerir-datos-por-lotes-realizar-operaciones-inteligentes-y-analizar-en-synapse)
-- [Resumen](#resumen)
-- [Índice](#índice)
-- [Diagrama de Arquitectura](#diagrama-de-arquitectura)
-- [Implementación](#deployment)
-    - [Paso 1. Ingesta de Datos en el Almacenamiento creado en el Paso 1](#tarea-1-ingesta-de-datos-en-la-cuenta-de-almacenamiento)
-    - [Paso 2. Configurar un área de trabajo de Synapse](#tarea-2-configurar-un-área-de-trabajo-de-synapse)
-        - [a. Iniciar Azure Cloud Shell](#a-iniciar-azure-cloud-shell)
-        - [b. En Cloud Shell ejecutar los siguientes comandos:](#b-cargar-archivos-a-una-cuenta-de-almacenamiento)
-        - [c. Crear la Tabla SQL de Destino](#a-crear-la-tabla-sql-de-destino)
-        - [d. Crear Servicios Vinculados de Origen y Destino](#b-crear-servicios-vinculados-de-origen-y-destino)
-        - [e. Crear Flujo de Datos en Synapse](#c-crear-flujo-de-datos-en-synapse)
-        - [f. Crear Pipeline de Synapse](#d-crear-pipeline-de-synapse)
-        - [g. Activar el Pipeline de Synapse](#e-activar-el-pipeline-de-synapse)
-    - [Paso 3. Consultar Resultados en Nuestra Tabla SQL](#tarea-3-consultar-resultados-en-nuestra-tabla-sql)
+## Objetivos del Laboratorio
 
+Será capaz de completar las siguientes tareas:
+
+- Tarea 1: Ingesta de Datos en la Cuenta de Almacenamiento
+- Tarea 2: Configurar un área de trabajo de Synapse
+- Tarea 3: Consultar Resultados en Nuestra Tabla SQL
 
 # Diagrama de Arquitectura
 
@@ -182,9 +171,9 @@ A continuación, necesitaremos crear dos servicios vinculados: uno para nuestra 
 
      ![](images/synapse8.png)
 
-1. En la ventana *Nuevo servicio vinculado* que se abre, ingrese **synapselinkedservice** **(1)** para el nombre de su servicio vinculado de destino. Seleccione la **suscripción de Azure (2)** con la cual ha estado trabajando. Seleccione **asaworkspace<inject key="DeploymentID" enableCopy="false"/> (3)** para el **Nombre del servidor** y utilice **openaisql (4)** para el **Nombre de la base de datos**. Asegúrese de cambiar el **Tipo de autenticación** a **Identidad Administrada Asignada por el Sistema (5)**, luego haga clic en **Probar conexión (6)** y haga clic en **Crear (7)**.
+1. En la ventana *Nuevo servicio vinculado* que se abre, ingrese **synapselinkedservice** **(1)** para el nombre de su servicio vinculado de destino. Seleccione la **suscripción de Azure (2)** con la cual ha estado trabajando. Seleccione **asaworkspace<inject key="DeploymentID" enableCopy="false"/> (3)** para el **Nombre del servidor** y utilice **openaisql (4)** para el **Nombre de la base de datos**. Asegúrese de cambiar el **Tipo de autenticación** a **Identidad Administrada Asignada por el Sistema (5)**, luego desplácese hacia abajo y seleccione la opción **Heredado (6)**, luego haga clic en **Probar conexión (7)** y haga clic en **Crear (8)**. 
 
-    ![](images/synapse-1.png)
+    ![](images/synapse-1e.png)
 
 1. Una vez que haya creado los dos servicios vinculados, asegúrese de presionar el botón **Publicar todo** en la parte superior para publicar nuestro trabajo. Finalice la creación de los servicios vinculados y haga clic en **Publicar**.
 
@@ -324,3 +313,9 @@ Luego expanda la sección **Ensayo (3)** en la parte inferior de la configuraci�
    - Para los resultados de su consulta, si está utilizando los archivos cargados como parte de este repositorio o taller, debería ver **Resultados (6)** similares a los siguientes.
 
       ![](images/lastpic.png)
+
+## Resumen
+
+Este escenario permite el uso de OpenAI para resumir y analizar los registros de llamadas de servicio al cliente de la empresa ficticia Contoso. Los datos se ingestan a una cuenta de almacenamiento de blobs y luego se procesan mediante una Azure Functions, la cual devolverá el sentimiento del cliente, la oferta de productos sobre la que se trató la conversación y el tema de la llamada, así como un resumen de la misma. Estos resultados se escriben en una ubicación designada y separada en el almacenamiento de blobs. A partir de ahí, se utiliza Synapse Analytics para extraer los datos recién depurados y crear una tabla que se puede consultar para obtener más información.
+
+### Ha completado el laboratorio con éxito.
