@@ -120,6 +120,8 @@ Los registros de llamadas se cargan en una ubicación designada en el almacenami
 
    ![](images/batch_file_upload.png)
 
+   <validation step="20131c23-f53d-496b-a26f-66b0fbe75e26" />
+
 ## Tarea 2: Configurar un área de trabajo de Synapse
 
 ### **A. Crear la Tabla SQL de Destino** 
@@ -292,6 +294,8 @@ Luego expanda la sección **Ensayo (3)** en la parte inferior de la configuraci�
 2. Para ver la ejecución del pipeline, navegue hasta el lado izquierdo de la pantalla y elija la opción **Monitorear (1)**. Luego seleccione la opción **Pipeline runs (2)** en la sección **Integration**. Verá la ejecución del pipeline que desencadenó en la sección **Desencadenado (3)** como **pipeline 1 (4)**. Este pipeline debería tomar aproximadamente 4 minutos (si está utilizando los datos cargados para el taller).
 
    ![](images/pipeline-run-1.png)
+
+      <validation step="2868de49-35ce-4286-9743-148067a3b4a0" />
 
 ## Tarea 3: Consultar Resultados en Nuestra Tabla SQL
 
