@@ -6,11 +6,11 @@
      
 2. Selecione **Apps** na navegação à esquerda e clique em **Import canvas app**. 
 
-    ![](./images/powerapps-import.png)
+    ![](./images/powerapps-import-1.png)
 
 3. Na página **Import package**, clique em **Upload**.
 
-    ![](./images/upload-importpackage.png)
+    ![](./images/upload-importpackage-1.png)
 
 4. Navegue até `C:\labfile\OpenAIWorkshop-main\OpenAIWorkshop-main\scenarios\powerapp_and_python\powerapp` Selecione a pasta  **OpenAI-Playground_20230302010547.zip (1)** e clique em **Open (2)**.
 
@@ -32,29 +32,29 @@
 
 9. Quando a importação estiver concluída, clique em **Apps (1)**, clique em `...` **(2)** ao lado de **OpenAI Playground**, e clique em **Edit (3)**.
 
-      ![](./images/powerapps-apps-edit.png)
+      ![](./images/powerapps-apps-edit-1.png)
 
    >**Nota**: Se você não conseguir ver a opção **OpenAI Playground**, aguarde 5 minutos e, enquanto isso, tente atualizar a página.
 
 10. Você observará que ele importou o aplicativo de tela do Power Apps e o Power Automate Flow para o espaço de trabalho.
 
-      ![](./images/powerapps-apps-view.png)
+      ![](./images/powerapps-apps-view-1.png)
 
 11. Para voltar atrás, clique em **Back (1)**, depois clique em **Leave (2)**.
 
-      ![](./images/powerapps-apps-exit.png)
+      ![](./images/powerapps-apps-exit-1.png)
 
 12. Em seguida, no tabulador **Flows (1)**, selecione **Openaisummarization (2)**, depois clique em `...` **(3)** e **Turn on (4)** seu flow.
 
-      ![](./images/flow-on.png)
+      ![](./images/flow-on-1.png)
 
 13. Clique em **Edit** para Openaisummarization.
 
-      ![](./images/flow-edit.png)
+      ![](./images/flow-edit-1.png)
 
 14. Edite o passo HTTP do Power Automate Flow atualizando **https://your-resource-name.openai.azure.com/** com **<inject key="OpenAIEndpoint" enableCopy="true"/>** **(1)**, **deployment-id** com **<inject key="openaimodulename" enableCopy="true"/>** **(2)**, **api-version** com **2023-09-15-preview** **(3)**, **YOUR_API_KEY** com **<inject key="OpenAIKey" enableCopy="true"/>** **(4)**, e clique em **Save** **(5)**.
 
-      ![](./images/update-values.png)
+      ![](./images/update-values-1.png)
    
 15. Na página **Apps (1)**, selecione a applicação **OpenAI Playground** para executar o aplicativo clicando no botão **Play (2)**.
 
