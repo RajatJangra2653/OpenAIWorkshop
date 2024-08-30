@@ -35,7 +35,7 @@ Os registros de chamadas são enviados para blob storage. Este envio aciona um A
 
 1. No [Portal de Azure](https://portal.azure.com?azure-portal=true), selecione o botão **[>_]** (*Cloud Shell*) que se encontra no topo da página a direita da pesquisa. O painel do Cloud Shell irá abrir na parte inferior do portal.
 
-    ![](images/E2I1S1.png)
+    ![](images/E2I1S1-1.png)
 
 2. Na primeira vez que abrir o Cloud Shell, pode ser solicitado que escolha o tipo de shell que deseja usar (*Bash* ou *PowerShell*). Selecione **Bash**. Se esta opção não abrir pode avançar para o próximo passo.
 
