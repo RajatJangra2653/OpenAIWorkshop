@@ -35,17 +35,17 @@ Vamos agora iniciar o playground do Azure OpenAI para aprender mais sobre Prompt
 
 1. No **Portal de Azure**, pesquise por **OpenAI** e selecione **OpenAI**.
 
-   ![](../natural_language_query/images/openai8.png)
+   ![](../natural_language_query/images/openai8-1.png)
 
 1. Na janela **Azure AI services | Azure OpenAI**, selecione **openai-<inject key="DeploymentID" enableCopy="false"/>**
 
 1. No painel de recursos do Azure OpenAI, clique em **Go to Azure OpenAI Studio** ele navegará até **Azure AI Studio**.
 
-   ![](../natural_language_query/images/openai11-1.png)
+   ![](../natural_language_query/images/openai11-1-1.png)
 
 1. No **Azure AI Studio**, clique em **Chat** sobre **Playground** no menu à esquerda..
 
-    ![](../powerapp_and_python/images/chat-demo1.png)
+    ![](../powerapp_and_python/images/chat-demo1-1.png)
 
 1. Na seção **Chat**, escolha **default** **(1)** em use a system message template. Em seguida, faça qualquer consulta da **Chat session** **(2)** para obter a resposta do openai.
 
@@ -54,7 +54,7 @@ Vamos agora iniciar o playground do Azure OpenAI para aprender mais sobre Prompt
    
    > **Nota**: O Chat pode não responder com um output exato, conforme mostrado nas capturas de tela. A seguir estão os exemplos do que você provavelmente verá neste exercício, mas a resposta pode variar.
  
-    ![](../powerapp_and_python/images/prompt.png)
+    ![](../powerapp_and_python/images/prompt-1.png)
 
 ---
 ## Exemplos de prompt básicos
