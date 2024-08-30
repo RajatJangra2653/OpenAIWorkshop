@@ -216,7 +216,7 @@ Ainda dentro do Synapse Studio, agora precisaremos criar um **Data flow** para i
    
 1. Em seguida, precisaremos ir para o painel **Source options (1)** e listar as opções **JSON settings (2)**. Precisamos alterar a opção **Document form** para a configuração **Array of documents (3)**. Isso permite que nosso fluxo leia cada arquivo JSON como uma entrada separada em nosso banco de dados.
 
-   ![](images/synapse16.png)   
+   ![](images/synapse16-1.png)   
 
 1. Ativar a opção **data flow debug** localizada na barra de menu superior adjacente ao botão validar e clique em **OK** na janela pop-up *Turn on data flow debug*.
 
@@ -224,21 +224,21 @@ Ainda dentro do Synapse Studio, agora precisaremos criar um **Data flow** para i
 
 1. Navegue até ao separador **Data preview** e execute uma visualização para verificar seu trabalho até agora.
     
-    ![](images/dataflow-datapreview.png)
+    ![](images/dataflow-datapreview-1.png)
 
     >**Nota**: Se não conseguir visualizar os dados no separador Data Preview, clique no botão Atualizar até os dados aparecerem.
    
 1. Em seguida, podemos adicionar no nosso bloco **Select** e fazer nossas pequenas alterações antes de gravar os dados na tabela Synapse SQL. Para começar, clique no pequeno sinal **+ (1)** ao lado do nosso bloco de ingestão e escolha a opção **Select (2)**.
 
-   ![](images/synapse17.png)
+   ![](images/synapse17-1.png)
 
 1. Podemos deixar todas as configurações como padrão. Em seguida, adicionaremos nosso bloco **Sink**. sta é a etapa que gravará nossos dados em nosso banco de dados Synapse SQL. Clique no pequeno sinal **+ (1)** o lado do nosso bloco **Select**. até a parte inferior do menu de opções e selecione a opção **Sink (2)**.
 
-   ![](images/synapse18.png)
+   ![](images/synapse18-1.png)
 
 1. Quando o bloco **Sink (1)** abrir, escolha **Inline (2)** para o *Sink type*. Em seguida, selecione **Azure Synapse Analytics (3)** para o *Inline dataset type*, e para o **Linked service**, selecione **Synapselinkedservice (4)**, que foi criado na etapa anterior. Certifique-se de executar **Test connection (5)** para o linked service.
 
-   ![](images/sink-1.png)
+   ![](images/sink-1-1.png)
 
    > **Nota**: Se a conexão de teste demorar mais de 3 a 4 minutos, siga as etapas abaixo.
 
@@ -248,11 +248,11 @@ Ainda dentro do Synapse Studio, agora precisaremos criar um **Data flow** para i
 
    - Na janela Editar linked service que é aberta, selecione o método de seleção do Azure como **From Azure subscription** **(1)**. Selecione a **Azure subscription (2)** para a qual você tem trabalhado. Selecione **asaworkspace<inject key="DeploymentID" enableCopy="false"/> (3)** para **Server name** e **openaisql (4)** como o **Database name**, clique em **Test connection (5)** e clique em **Save (6)**.
 
-     ![](images/p19.png)
+     ![](images/p19-1.png)
 
 1. Em seguida, precisaremos ir para o separador **Settings (1)** e ajustar o **Schema name** e **Table name**. Se você utilizou o script fornecido anteriormente para criar a tabela de destino, o nome do esquema é **dbo (1)** e o nome da tabela é **cs_detail (2)**.
 
-    ![](images/synapse20.png)
+    ![](images/synapse20-1.png)
 
 1. Antes de terminarmos nosso trabalho sobre o data flow, devemos visualizar nossos dados. A pré-visualização dos nossos dados revela que só temos 3 colunas quando esperamos um total de 5. Perdemos as nossas colunas Summary e Sentiment.
 
@@ -267,7 +267,7 @@ Ainda dentro do Synapse Studio, agora precisaremos criar um **Data flow** para i
     
 1. Retornando ao bloco **Sink (1)** por baixo de **Data preview (2)** clique **Refresh (3)**, vamos agora ver as 5 colunas que são esperadas.
 
-    ![](images/refresh-sink-1.png)
+    ![](images/refresh-sink-1-1.png)
 
 1. Depois de revisar os dados e estar satisfeito que todas as colunas foram mapeadas com êxito (você deve ter 5 colunas no total, todas mostrando dados em um formato tipo string), podemos selecionar **Publish all** na parte superior para salvar nossa configuração atual. Uma janela será aberta no lado direito da tela; pressione o botão azul **Publish** na parte inferior esquerda para salvar suas alterações.
 
@@ -281,16 +281,16 @@ Ainda dentro do Synapse Studio, agora precisaremos criar um **Data flow** para i
 
 1. Depois de criarmos o nosso **Data flow**, precisaremos configurar um **Pipeline** para alojar o Data Flow. Para criar um **Pipeline**,  navegue até a barra de menu à esquerda e escolha a opção **Integrate (1)**. Em seguida, clique no botão **+ (2)** a parte superior do menu Integrate para **Add a new resource** e escolha **Pipeline (3)**.
 
-   ![](images/new-pipeline-1.png)
+   ![](images/new-pipeline-1-1.png)
 
 2. Em seguida, precisamos adicionar um **Data flow** ao nosso Pipeline. Com o novo separador **Pipeline tab (1)** aberto, vá para a seção **Activities** e procure por `data` **(2)** e selecione a atividade **Data flow (3)** e **drag-and-drop (4)** no seu Pipeline.
 
-   ![](images/data-drag-1.png)
+   ![](images/data-drag-1-1.png)
 
 3. No separador **Settings (1)** do **Data flow**, selecione o menu **Data flow (2)** e selecione o nome do fluxo de dados criado na etapa anterior. 
 Em seguida, expanda a seção **Staging (3)** na parte inferior das configurações e utilize o menu suspenso para o **Staging linked service**. Escolha o linked service que você criou **openailinkedservice (4)** para garantir a **Test connection (5)**. Em seguida, defina uma **Staging storage folder** na parte inferior e digite **workshop-data/Staging** **(6)**.
 
-   ![](images/staging-1.png)
+   ![](images/staging-1-1.png)
 
 4. Em seguida, clique em **Publish all** para publicar as alterações efetuadas e salvar o seu progresso.
 
@@ -298,17 +298,17 @@ Em seguida, expanda a seção **Staging (3)** na parte inferior das configuraç�
 
 1. Depois de publicar com sucesso o seu trabalho, precisamos iniciar o nosso pipeline. Para fazer isso, logo abaixo dos separadores na parte superior do Studio, há um ícone de *raio* que diz **Add trigger (1)**. Clique para adicionar um trigger e selecione **Trigger now (2)** para iniciar uma execução de pipeline e, quando a janela abrir, clique em **OK**.
 
-    ![](images/trigger-1.png)
+    ![](images/trigger-1-1.png)
     
 2. Para ver a execução do pipeline, navegue até o lado esquerdo da tela e escolha a opção **Monitor (1)**. Em seguida, selecione a opção **Pipeline runs (2)** na seção **Integration**. Em seguida, você verá a execução do pipeline que você acionou na seção **Triggered (3)** como **pipeline 1 (4)**.  Este pipeline deve levar aproximadamente 4 minutos (se você estiver usando os dados carregados para o workshop).
 
-   ![](images/pipeline-run-1.png)
+   ![](images/pipeline-run-1-1.png)
 
 ## Task 3: Resultados da Consulta na Nossa Tabela SQL
 
 1. Certifique-se de que o status de execução do pipeline tenha **Succeeded**.
 
-    ![](images/pipline-succeeded.png)
+    ![](images/pipline-succeeded-1.png)
 
 2. Agora que os dados estão na tabela de destino, eles estão disponíveis para uso executando consultas SQL em relação a eles ou conectando o PowerBI e criando visualizações. A Azure Function também está em execução, portanto, tente carregar alguns dos arquivos de transcrição para a pasta generated_documents em seu container e veja como a função a processa e cria um novo arquivo na pasta cleansed_documents.
 
