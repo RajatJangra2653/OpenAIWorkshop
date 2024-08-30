@@ -2,17 +2,17 @@
 
 1. Search and select **Azure Synapse Analytics** in the Azure portal.
 
-      ![](images/p2.png)
+      ![](images/p2-1.png)
 
 1. On **Azure Synapse Analytics** window select **asaworkspace<inject key="DeploymentID" enableCopy="false"/>**.   
 
 1. On the **Overview** blade under the **Getting started** section, click **Open** to open Synapse Studio.
      
-     ![](images/open-workspace.png)
+     ![](images/open-workspace-1.png)
     
 1. Click on **Develop (1)**, then click on **+ (2)**, and select **Import**.
 
-    ![](images/import-note.png)
+    ![](images/import-note-1.png)
 
 1. Navigate to the `C:\labfile\OpenAIWorkshop\scenarios\powerapp_and_python\python` location and select `OpenAI_notebook.ipynb`, then click on **Open**.
 
