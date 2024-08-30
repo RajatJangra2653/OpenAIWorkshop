@@ -35,7 +35,7 @@ In the Chat playground, you're able to add few-shot examples. The term few-shot 
 In the Assistant setup, you can provide few-shot examples of what the user input may be, and what the assistant response should be. The assistant tries to mimic the responses you include here in tone, rules, and format you've defined in your system message.
 Let's go ahead and launch the Azure OpenAI playground to learn about prompt engineering. 
 
-1. In the **Azure portal**, search for **OpenAI** and select **Azure OpenAI**.
+1. In the **Azure portal**, search for **OpenAI** and select **OpenAI**.
 
    ![](../natural_language_query/images/openai8.png)
 
