@@ -33,7 +33,7 @@ No Chat playground, você pode adicionar exemplos de few-shot. O termo few-shot 
 Na configuração do Assistente, você pode fornecer alguns exemplos do que pode ser a entrada do usuário e qual deve ser a resposta do assistente. O assistente tenta imitar as respostas que você inclui aqui no tom, nas regras e no formato que você definiu na mensagem do sistema.
 Vamos agora iniciar o playground do Azure OpenAI para aprender mais sobre Prompt Engineering.
 
-1. No **Portal de Azure**, pesquise por **OpenAI** e selecione **Azure OpenAI**.
+1. No **Portal de Azure**, pesquise por **OpenAI** e selecione **OpenAI**.
 
    ![](../natural_language_query/images/openai8.png)
 

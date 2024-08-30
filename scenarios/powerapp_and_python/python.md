@@ -40,7 +40,7 @@ Neste laboratório, os participantes desenvolverão uma aplicação usando APIs 
 
      ![](images/key-endpoint.png)
    
-1. No Portal do Azure, navegue até ao **openaicustom-<inject key="DeploymentID" enableCopy="false"/>** resource group,  e selecione o **asaworkspace<inject key="DeploymentID" enableCopy="false"/>** Azure OpenAI resource.
+1. No Portal do Azure, navegue até ao **openaicustom-<inject key="DeploymentID" enableCopy="false"/>** resource group,  e selecione o **openai-<inject key="DeploymentID" enableCopy="false"/>** Azure OpenAI resource.
 
     ![](images/Ex4b-S7.1.png)
 
